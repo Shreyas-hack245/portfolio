@@ -1372,6 +1372,25 @@
                 out.prepend(card);
                 form.reset();
             });
+
+            // Discord copy-to-clipboard handler
+            const discordBtn = document.getElementById('discord-btn');
+            const discordCopied = document.getElementById('discord-copied');
+            if (discordBtn) {
+                discordBtn.addEventListener('click', e => {
+                    e.preventDefault();
+                    const handle = 'shreyasbhat045';
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(handle).then(() => {
+                            if (discordCopied) { discordCopied.style.display = 'inline'; setTimeout(() => discordCopied.style.display = 'none', 1500); }
+                        }).catch(() => {});
+                    } else {
+                        const ta = document.createElement('textarea'); ta.value = handle; document.body.appendChild(ta); ta.select();
+                        try { document.execCommand('copy'); if (discordCopied) { discordCopied.style.display = 'inline'; setTimeout(() => discordCopied.style.display = 'none', 1500); } } catch (err) {}
+                        ta.remove();
+                    }
+                });
+            }
         })();
     </script>
 </body>
