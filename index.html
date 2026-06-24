@@ -1126,6 +1126,24 @@
             <br />
             <p class="ct-line"><span class="ct-k">$ </span><span class="blink"></span></p>
         </div>
+        <!-- Simple client-side contact form -->
+        <form id="contact-form" style="margin-top:1rem; display:block;"> 
+            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">NAME&nbsp;&nbsp;&nbsp;&nbsp; :: </span>
+                <input id="cname" type="text" required placeholder="Your name" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;" />
+            </label>
+            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">EMAIL&nbsp;&nbsp;&nbsp; :: </span>
+                <input id="cemail" type="email" required placeholder="you@example.com" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;" />
+            </label>
+            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">MESSAGE&nbsp; :: </span>
+                <textarea id="cmsg" rows="4" required placeholder="Hi — write your message" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;"></textarea>
+            </label>
+            <div style="margin-top:0.6rem;">
+                <button type="submit" class="btn"><span>[ submit ]</span></button>
+            </div>
+        </form>
+
+        <!-- Display area for submitted details -->
+        <div id="contact-output" style="margin-top:1rem; display:none;"></div>
         <div class="btns">
             <a href="mailto:shreyasbhat404@gmail.com" class="btn"><span>[ send_message ]</span></a>
             <a href="https://github.com/Shreyas-hack245" class="btn btn-dim" target="_blank"><span>[ github_profile
@@ -1334,6 +1352,26 @@
 
         // ── YEAR ──
         document.getElementById('yr').textContent = new Date().getFullYear();
+
+        // ── CONTACT FORM HANDLER ──
+        (function () {
+            const form = document.getElementById('contact-form');
+            const out = document.getElementById('contact-output');
+            function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
+            if (!form || !out) return;
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const name = document.getElementById('cname').value.trim();
+                const email = document.getElementById('cemail').value.trim();
+                const msg = document.getElementById('cmsg').value.trim();
+                const card = document.createElement('div');
+                card.className = 'ct-box';
+                card.innerHTML = `\n                    <p class="ct-line"><span class="ct-k">NAME&nbsp;&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v">${escapeHtml(name)}</span></p>\n                    <p class="ct-line"><span class="ct-k">EMAIL&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v">${escapeHtml(email)}</span></p>\n                    <p class="ct-line"><span class="ct-k">MESSAGE&nbsp; :: </span><span class="ct-v">${escapeHtml(msg).replace(/\n/g,'<br/>')}</span></p>`;
+                out.style.display = 'block';
+                out.prepend(card);
+                form.reset();
+            });
+        })();
     </script>
 </body>
 
