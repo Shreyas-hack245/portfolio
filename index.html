@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>[ 0xSHREYAS :: CYBERSECURITY STUDENT ]</title>
+    <title>Shreyas Bhat — Security Analyst / Blue Team</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
         rel="stylesheet" />
     <style>
         * {
@@ -17,22 +17,21 @@
         }
 
         :root {
-            --g: #00ff88;
-            --g2: #00cc6a;
-            --g3: rgba(0, 255, 136, 0.08);
-            --c: #00e5ff;
-            --r: #ff3c3c;
-            --a: #ffb800;
-            --bg: #060a08;
-            --bg2: #0c1210;
-            --bg3: #101a12;
-            --bd: rgba(0, 255, 136, 0.12);
-            --bdb: rgba(0, 255, 136, 0.35);
-            --tx: #b8d4b0;
-            --txd: #4a7a58;
-            --mono: 'Share Tech Mono', monospace;
-            --orb: 'Orbitron', sans-serif;
-            --sans: 'Inter', sans-serif;
+            --bg: #0a0d12;
+            --bg2: #10141c;
+            --bg3: #161c26;
+            --line: rgba(231, 234, 240, 0.08);
+            --line-strong: rgba(91, 140, 255, 0.35);
+            --ink: #e7eaf0;
+            --ink-dim: #8b93a7;
+            --ink-faint: #4c5364;
+            --amber: #ffb020;
+            --blue: #5b8cff;
+            --red: #ff5c5c;
+            --green: #3ddc84;
+            --disp: 'Space Grotesk', sans-serif;
+            --mono: 'IBM Plex Mono', monospace;
+            --body: 'IBM Plex Sans', sans-serif;
         }
 
         html {
@@ -41,59 +40,29 @@
 
         body {
             background: var(--bg);
-            color: var(--tx);
-            font-family: var(--mono);
+            color: var(--ink);
+            font-family: var(--body);
+            font-weight: 300;
             overflow-x: hidden;
-            cursor: none;
         }
 
-        /* CURSOR */
-        #cur,
-        #cdot {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s;
-        }
-
-        #cur {
-            width: 22px;
-            height: 22px;
-            border: 1.5px solid var(--g);
-        }
-
-        #cdot {
-            width: 4px;
-            height: 4px;
-            background: var(--g);
-        }
-
-        #cur.hover {
-            transform: translate(-50%, -50%) scale(2);
-            border-color: var(--c);
-        }
-
-        /* THREE CANVAS */
         #bg-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* SCANLINES */
         body::after {
             content: '';
             position: fixed;
             inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.025) 3px, rgba(0, 0, 0, 0.025) 4px);
+            background: radial-gradient(ellipse at 20% 0%, rgba(91, 140, 255, 0.05), transparent 55%),
+                radial-gradient(ellipse at 85% 60%, rgba(255, 176, 32, 0.04), transparent 55%);
             pointer-events: none;
-            z-index: 998;
+            z-index: 0;
         }
 
         /* NAV */
@@ -101,73 +70,81 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 2.5rem;
+            padding: 1.1rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(6, 10, 8, 0.7);
-            border-bottom: 1px solid var(--bd);
+            backdrop-filter: blur(14px);
+            background: rgba(10, 13, 18, 0.72);
+            border-bottom: 1px solid var(--line);
         }
 
         .nlogo {
-            font-family: var(--orb);
-            font-size: 0.8rem;
-            color: var(--g);
-            letter-spacing: 0.08em;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            color: var(--ink);
+        }
+
+        .nlogo b {
+            color: var(--blue);
+            font-weight: 600;
         }
 
         .nlogo span {
-            color: var(--txd);
+            color: var(--ink-faint);
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.2rem;
         }
 
         nav a {
-            color: var(--txd);
+            color: var(--ink-dim);
             text-decoration: none;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             transition: color 0.2s;
         }
 
         nav a:hover {
-            color: var(--g);
+            color: var(--blue);
         }
 
         .nstatus {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: var(--mono);
             font-size: 0.65rem;
-            color: var(--txd);
+            letter-spacing: 0.08em;
+            color: var(--ink-dim);
         }
 
         .ndot {
             width: 6px;
             height: 6px;
-            background: var(--g);
+            background: var(--green);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse 2.2s infinite;
         }
 
         @keyframes pulse {
 
             0%,
             100% {
-                box-shadow: 0 0 6px var(--g);
+                box-shadow: 0 0 6px var(--green);
                 opacity: 1;
             }
 
             50% {
                 box-shadow: none;
-                opacity: 0.3;
+                opacity: 0.35;
             }
         }
 
@@ -178,134 +155,108 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 5rem 2rem 4rem;
+            padding: 7rem 2.5rem 4rem;
         }
 
-        .hero-inner {
-            max-width: 860px;
+        .hero-grid {
+            max-width: 1180px;
             width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3.5rem;
+            align-items: center;
         }
 
-        .h-prompt {
-            font-size: 0.75rem;
-            color: var(--txd);
-            margin-bottom: 1rem;
+        .h-eyebrow {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            color: var(--amber);
+            margin-bottom: 1.1rem;
+            text-transform: uppercase;
         }
 
-        .h-prompt .u {
-            color: var(--g);
-        }
-
-        .h-prompt .h {
-            color: var(--c);
-        }
-
-        .h-prompt .p {
-            color: var(--a);
+        .h-eyebrow span {
+            color: var(--ink-faint);
         }
 
         .h-name {
-            font-family: var(--orb);
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            font-weight: 900;
-            line-height: 0.95;
-            color: var(--g);
-            letter-spacing: -0.02em;
-            margin-bottom: 0.4rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .h-name::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            color: var(--c);
-            clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
-            animation: glitch-clip 4s steps(1) infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes glitch-clip {
-
-            0%,
-            90% {
-                clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-                transform: translate(0);
-            }
-
-            91% {
-                clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
-                transform: translate(-3px, 1px);
-            }
-
-            92% {
-                clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
-                transform: translate(3px, -1px);
-            }
-
-            93% {
-                clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-                transform: translate(0);
-            }
+            font-family: var(--disp);
+            font-size: clamp(2.5rem, 5.4vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.02;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
         }
 
         .h-role {
-            font-family: var(--orb);
-            font-size: clamp(0.7rem, 1.5vw, 0.95rem);
-            color: var(--txd);
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 2.5rem;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--ink-dim);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
         }
 
         .h-role .hl {
-            color: var(--a);
+            color: var(--blue);
         }
 
         .h-bio {
-            font-family: var(--sans);
-            font-size: 0.95rem;
+            font-size: 0.97rem;
             line-height: 1.85;
-            color: var(--tx);
-            max-width: 540px;
-            border-left: 2px solid var(--g2);
+            color: var(--ink-dim);
+            max-width: 520px;
+            border-left: 2px solid var(--line-strong);
             padding-left: 1.25rem;
             margin-bottom: 2.5rem;
-            font-weight: 300;
+        }
+
+        .h-bio strong {
+            color: var(--ink);
+            font-weight: 500;
         }
 
         .h-stats {
             display: flex;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            gap: 0;
+            border: 1px solid var(--line);
+            margin-bottom: 2.5rem;
+            width: fit-content;
+        }
+
+        .stat {
+            padding: 0.85rem 1.4rem;
+            border-right: 1px solid var(--line);
+        }
+
+        .stat:last-child {
+            border-right: none;
         }
 
         .sv {
-            font-family: var(--orb);
-            font-size: 2rem;
+            font-family: var(--disp);
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--g);
+            color: var(--ink);
             display: block;
             line-height: 1;
         }
 
         .sl {
-            font-size: 0.6rem;
-            color: var(--txd);
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            color: var(--ink-faint);
             text-transform: uppercase;
-            letter-spacing: 0.18em;
-            margin-top: 0.2rem;
+            letter-spacing: 0.1em;
+            margin-top: 0.35rem;
             display: block;
         }
 
         .btns {
             display: flex;
-            gap: 1rem;
+            gap: 0.9rem;
             flex-wrap: wrap;
         }
 
@@ -313,211 +264,234 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.7rem 1.4rem;
+            padding: 0.75rem 1.4rem;
             font-family: var(--mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
             text-decoration: none;
-            border: 1px solid var(--g);
-            color: var(--g);
+            border: 1px solid var(--blue);
+            color: var(--blue);
             background: transparent;
-            cursor: none;
-            transition: all 0.25s;
+            transition: all 0.2s ease;
             text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--g);
-            transform: translateX(-101%);
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn:hover::before {
-            transform: translateX(0);
         }
 
         .btn:hover {
+            background: var(--blue);
             color: var(--bg);
         }
 
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
         .btn-dim {
-            border-color: var(--bd);
-            color: var(--txd);
-        }
-
-        .btn-dim::before {
-            background: var(--g3);
+            border-color: var(--line);
+            color: var(--ink-dim);
         }
 
         .btn-dim:hover {
-            color: var(--c);
-            border-color: var(--c);
+            border-color: var(--ink-dim);
+            background: var(--bg3);
+            color: var(--ink);
+        }
+
+        /* LOG PANEL — signature element */
+        .log-panel {
+            border: 1px solid var(--line);
+            background: rgba(16, 20, 28, 0.75);
+            backdrop-filter: blur(6px);
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .log-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid var(--line);
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.08em;
+        }
+
+        .log-head .dots {
+            display: flex;
+            gap: 0.35rem;
+        }
+
+        .log-head .dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--line-strong);
+        }
+
+        .log-body {
+            flex: 1;
+            overflow: hidden;
+            padding: 0.9rem 1rem;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            line-height: 1.9;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .log-line {
+            white-space: nowrap;
+            opacity: 0;
+            animation: logIn 0.4s forwards;
+            color: var(--ink-dim);
+        }
+
+        @keyframes logIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .log-line .ts {
+            color: var(--ink-faint);
+        }
+
+        .log-line .sev-info {
+            color: var(--blue);
+        }
+
+        .log-line .sev-high {
+            color: var(--amber);
+        }
+
+        .log-line .sev-crit {
+            color: var(--red);
+        }
+
+        .log-line .sev-ok {
+            color: var(--green);
         }
 
         /* SECTION COMMONS */
         .sec {
             position: relative;
             z-index: 1;
-            padding: 6rem 2rem;
-            max-width: 1040px;
+            padding: 6rem 2.5rem;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .sec-border {
-            border-top: 1px solid var(--bd);
+            border-top: 1px solid var(--line);
         }
 
         .sec-tag {
-            font-size: 0.65rem;
-            color: var(--g);
-            letter-spacing: 0.22em;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--amber);
+            letter-spacing: 0.16em;
             text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-
-        .sec-tag::before {
-            content: '// ';
-            color: var(--txd);
+            margin-bottom: 0.5rem;
         }
 
         .sec-title {
-            font-family: var(--orb);
-            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-family: var(--disp);
+            font-size: clamp(1.5rem, 3.2vw, 2.2rem);
             font-weight: 700;
-            color: var(--tx);
+            color: var(--ink);
             margin-bottom: 3rem;
-            letter-spacing: 0.04em;
         }
 
         .sec-title em {
-            color: var(--g);
+            color: var(--blue);
             font-style: normal;
         }
 
         /* SKILLS */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1px;
-            background: var(--bd);
-            border: 1px solid var(--bd);
+            background: var(--line);
+            border: 1px solid var(--line);
         }
 
         .sk {
             background: var(--bg);
             padding: 1.75rem;
-            position: relative;
-            overflow: hidden;
-            transition: background 0.25s;
-        }
-
-        .sk::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--g), transparent);
-            transform: scaleX(0);
-            transition: transform 0.4s;
-        }
-
-        .sk:hover::before {
-            transform: scaleX(1);
+            transition: background 0.2s;
         }
 
         .sk:hover {
-            background: var(--bg3);
+            background: var(--bg2);
         }
 
-        .sk-num {
-            position: absolute;
-            top: 1rem;
-            right: 1.25rem;
-            font-family: var(--orb);
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: rgba(0, 255, 136, 0.04);
-        }
-
-        .sk-ico {
-            font-size: 1.6rem;
-            margin-bottom: 0.75rem;
+        .sk-code {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.9rem;
         }
 
         .sk-name {
-            font-family: var(--orb);
-            font-size: 0.8rem;
-            color: var(--g);
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+            font-family: var(--disp);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.55rem;
         }
 
         .sk-desc {
-            font-family: var(--sans);
-            font-size: 0.78rem;
-            color: var(--txd);
+            font-size: 0.82rem;
+            color: var(--ink-dim);
             line-height: 1.65;
-            margin-bottom: 1rem;
-            font-weight: 300;
+            margin-bottom: 1.1rem;
         }
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-        }
-
-        .tag {
-            font-size: 0.6rem;
-            padding: 0.15rem 0.5rem;
-            border: 1px solid var(--bd);
-            color: var(--txd);
-            letter-spacing: 0.05em;
-            transition: all 0.2s;
-        }
-
-        .tag.on {
-            border-color: var(--g);
-            color: var(--g);
-        }
-
-        /* BAR */
         .bar-wrap {
-            margin-top: 0.75rem;
+            margin-top: 0.8rem;
         }
 
         .bar-label {
             display: flex;
             justify-content: space-between;
+            font-family: var(--mono);
             font-size: 0.6rem;
-            color: var(--txd);
-            margin-bottom: 0.3rem;
+            color: var(--ink-faint);
+            margin-bottom: 0.35rem;
         }
 
         .bar-track {
             height: 2px;
-            background: rgba(0, 255, 136, 0.08);
+            background: var(--line);
             position: relative;
             overflow: hidden;
         }
 
         .bar-fill {
             height: 100%;
-            background: var(--g);
+            background: var(--blue);
             width: 0%;
-            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 1.1s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.9rem;
+        }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            padding: 0.2rem 0.55rem;
+            border: 1px solid var(--line);
+            color: var(--ink-faint);
+        }
+
+        .tag.on {
+            border-color: var(--line-strong);
+            color: var(--blue);
         }
 
         /* PROJECTS */
@@ -525,68 +499,50 @@
             display: flex;
             flex-direction: column;
             gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
         }
 
         .proj {
-            border: 1px solid var(--bd);
-            padding: 2rem;
+            background: var(--bg);
+            padding: 1.9rem 2rem;
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 1rem 2rem;
             align-items: start;
-            transition: all 0.25s;
-            position: relative;
-            overflow: hidden;
-            cursor: none;
-        }
-
-        .proj::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--g);
-            transform: scaleY(0);
-            transition: transform 0.3s;
+            transition: background 0.2s;
         }
 
         .proj:hover {
-            border-color: var(--bdb);
-            background: var(--g3);
-        }
-
-        .proj:hover::after {
-            transform: scaleY(1);
+            background: var(--bg2);
         }
 
         .p-id {
+            font-family: var(--mono);
             font-size: 0.6rem;
-            color: var(--txd);
-            letter-spacing: 0.2em;
-            margin-bottom: 0.4rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.14em;
+            margin-bottom: 0.45rem;
+        }
+
+        .p-id .sev {
+            color: var(--amber);
         }
 
         .p-name {
-            font-family: var(--orb);
-            font-size: 1rem;
-            color: var(--tx);
+            font-family: var(--disp);
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--ink);
             margin-bottom: 0.5rem;
-            transition: color 0.2s;
-        }
-
-        .proj:hover .p-name {
-            color: var(--g);
         }
 
         .p-desc {
-            font-family: var(--sans);
-            font-size: 0.8rem;
-            color: var(--txd);
+            font-size: 0.83rem;
+            color: var(--ink-dim);
             line-height: 1.65;
             margin-bottom: 1rem;
-            font-weight: 300;
+            max-width: 560px;
         }
 
         .p-stack {
@@ -596,12 +552,12 @@
         }
 
         .badge {
+            font-family: var(--mono);
             font-size: 0.6rem;
-            padding: 0.15rem 0.55rem;
-            background: var(--g3);
-            border: 1px solid var(--bd);
-            color: var(--g2);
-            letter-spacing: 0.05em;
+            padding: 0.2rem 0.55rem;
+            background: rgba(91, 140, 255, 0.08);
+            border: 1px solid var(--line);
+            color: var(--blue);
         }
 
         .p-links {
@@ -613,23 +569,24 @@
         }
 
         .p-link {
+            font-family: var(--mono);
             font-size: 0.65rem;
-            color: var(--txd);
+            color: var(--ink-faint);
             text-decoration: none;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             transition: color 0.2s;
         }
 
         .p-link:hover {
-            color: var(--g);
+            color: var(--blue);
         }
 
         .p-link::before {
             content: '→ ';
         }
 
-        /* CERT TIMELINE */
+        /* CERT LOG */
         .tl {
             position: relative;
             padding-left: 2rem;
@@ -642,12 +599,12 @@
             top: 0.5rem;
             bottom: 0;
             width: 1px;
-            background: linear-gradient(to bottom, var(--g), transparent);
+            background: linear-gradient(to bottom, var(--blue), transparent);
         }
 
         .tl-item {
             position: relative;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.4rem;
         }
 
         .tl-item::before {
@@ -657,36 +614,35 @@
             top: 0.3rem;
             width: 8px;
             height: 8px;
-            background: var(--g);
-            border: 2px solid var(--bg);
+            background: var(--bg);
+            border: 2px solid var(--blue);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--g);
         }
 
         .tl-date {
-            font-size: 0.6rem;
-            color: var(--txd);
-            letter-spacing: 0.2em;
-            margin-bottom: 0.25rem;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.14em;
+            margin-bottom: 0.3rem;
         }
 
         .tl-name {
-            font-family: var(--orb);
-            font-size: 0.85rem;
-            color: var(--g);
-            margin-bottom: 0.2rem;
+            font-family: var(--disp);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.25rem;
         }
 
         .tl-iss {
-            font-family: var(--sans);
-            font-size: 0.78rem;
-            color: var(--txd);
-            font-weight: 300;
+            font-size: 0.8rem;
+            color: var(--ink-dim);
         }
 
         /* CONTACT */
         .ct-box {
-            border: 1px solid var(--bd);
+            border: 1px solid var(--line);
             padding: 2rem;
             background: var(--bg2);
             margin: 2rem 0;
@@ -694,30 +650,32 @@
         }
 
         .ct-box::before {
-            content: 'CONTACT.TXT';
+            content: 'CONTACT';
             position: absolute;
-            top: -0.5rem;
+            top: -0.55rem;
             left: 1rem;
+            font-family: var(--mono);
             font-size: 0.6rem;
-            color: var(--g);
+            color: var(--amber);
             background: var(--bg2);
             padding: 0 0.5rem;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.14em;
         }
 
         .ct-line {
+            font-family: var(--mono);
             font-size: 0.8rem;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
         .ct-k {
-            color: var(--txd);
+            color: var(--ink-faint);
             display: inline-block;
-            min-width: 10rem;
+            min-width: 8.5rem;
         }
 
         .ct-v {
-            color: var(--g);
+            color: var(--ink);
         }
 
         .ct-v a {
@@ -726,47 +684,57 @@
         }
 
         .ct-v a:hover {
+            color: var(--blue);
             text-decoration: underline;
         }
 
-        .blink {
-            display: inline-block;
-            width: 0.5rem;
-            height: 1rem;
-            background: var(--g);
-            vertical-align: middle;
-            margin-left: 2px;
-            animation: blink 1s step-end infinite;
+        #contact-form label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--ink-dim);
         }
 
-        @keyframes blink {
+        #contact-form input,
+        #contact-form textarea {
+            padding: 0.6rem 0.7rem;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            outline: none;
+            font-family: var(--body);
+            font-size: 0.85rem;
+        }
 
-            0%,
-            100% {
-                opacity: 1;
-            }
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            border-color: var(--blue);
+        }
 
-            50% {
-                opacity: 0;
-            }
+        #contact-output {
+            margin-top: 1rem;
+            display: none;
         }
 
         footer {
             position: relative;
             z-index: 1;
-            border-top: 1px solid var(--bd);
+            border-top: 1px solid var(--line);
             padding: 2rem;
             text-align: center;
+            font-family: var(--mono);
             font-size: 0.65rem;
-            color: var(--txd);
-            letter-spacing: 0.12em;
+            color: var(--ink-faint);
+            letter-spacing: 0.1em;
         }
 
-        /* FADE */
         .fi {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s, transform 0.7s;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
         }
 
         .fi.vis {
@@ -774,34 +742,19 @@
             transform: translateY(0);
         }
 
-        /* GLITCH TEXT utility */
-        @keyframes glitch2 {
-
-            0%,
-            85% {
-                text-shadow: none;
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
             }
 
-            86% {
-                text-shadow: -2px 0 var(--r), 2px 0 var(--c);
-            }
-
-            87% {
-                text-shadow: 2px 0 var(--r), -2px 0 var(--c);
-            }
-
-            88% {
-                text-shadow: none;
+            .log-panel {
+                height: 280px;
             }
         }
 
-        @media(max-width:640px) {
+        @media (max-width: 640px) {
             nav ul {
                 display: none;
-            }
-
-            .h-stats {
-                gap: 1.5rem;
             }
 
             .proj {
@@ -813,146 +766,162 @@
                 align-items: flex-start;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fi {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            .ndot {
+                animation: none;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <canvas id="bg-canvas"></canvas>
-    <div id="cur"></div>
-    <div id="cdot"></div>
 
-    <!-- NAV -->
     <nav>
-        <div class="nlogo">[ <span>0x</span>SHREYAS ]</div>
+        <div class="nlogo"><b>SB</b><span>/</span>SHREYAS BHAT</div>
         <ul>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#certs">Certs</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="nstatus"><span class="ndot"></span>AVAILABLE</div>
+        <div class="nstatus"><span class="ndot"></span>OPEN TO ROLES</div>
     </nav>
 
     <!-- HERO -->
     <section id="hero">
-        <div class="hero-inner">
-            <p class="h-prompt"><span class="u">root</span>@<span class="h">kali</span>:<span class="p">~</span>$
-                ./identify_target.sh</p>
-            <h1 class="h-name" data-text="SHREYAS BHAT">SHREYAS BHAT</h1>
-            <p class="h-role"><span class="hl">Cybersecurity Student</span> · Blue Team · CTF Player</p>
-            <p class="h-bio fi">
-            <p class="h-bio fi">
-
-            <p>Hi, I'm Shreyas Bhat. My interest in cybersecurity comes from a simple question: how do systems work, and
-                how can they fail? I focus on learning defensive security, exploring emerging threats, and building
-                practical skills through hands-on projects and CTF challenges. Every challenge is an opportunity to
-                learn, improve, and strengthen my understanding of the security landscape.</p>
-            <div class="h-stats fi">
-                <div><span class="sv" data-count="3">0</span><span class="sl">Projects Built</span></div>
-                <div><span class="sv" data-count="6">0</span><span class="sl">Certificates</span></div>
-                <div><span class="sv" data-count="5">0</span><span class="sl">CTFs Participated</span></div>
-                <div><span class="sv" data-count="25">0</span><span class="sl">Cyber Academy Labs</span></div>
+        <div class="hero-grid">
+            <div>
+                <p class="h-eyebrow">Case File <span>//</span> Analyst Profile <span>//</span> 2026</p>
+                <h1 class="h-name">Shreyas Bhat</h1>
+                <p class="h-role">Cybersecurity Student · <span class="hl">Blue Team</span> · CTF Player</p>
+                <p class="h-bio fi">
+                    I got into security by asking a simple question: how do systems actually work, and how do they
+                    fail? These days that means <strong>defensive security</strong> — watching traffic, hunting
+                    persistence, and closing the gaps attackers look for — learned through labs, CTFs, and projects
+                    I build to understand the problem, not just read about it.
+                </p>
+                <div class="h-stats fi">
+                    <div class="stat"><span class="sv" data-count="3">0</span><span class="sl">Projects Built</span>
+                    </div>
+                    <div class="stat"><span class="sv" data-count="6">0</span><span class="sl">Certificates</span></div>
+                    <div class="stat"><span class="sv" data-count="5">0</span><span class="sl">CTFs Played</span></div>
+                    <div class="stat"><span class="sv" data-count="25">0</span><span class="sl">Academy Labs</span>
+                    </div>
+                </div>
                 <div class="btns fi">
-                    <a href="#projects" class="btn"><span>[ view_projects ]</span></a>
-                    <a href="#contact" class="btn btn-dim"><span>[ contact_me ]</span></a>
-                    <a href="resume.pdf" class="btn btn-dim"><span>[ resume.pdf ]</span></a>
+                    <a href="#projects" class="btn"><span>View Projects</span></a>
+                    <a href="#contact" class="btn btn-dim"><span>Contact Me</span></a>
+                    <a href="resume.pdf" class="btn btn-dim"><span>Resume.pdf</span></a>
                 </div>
             </div>
+
+            <div class="log-panel fi">
+                <div class="log-head">
+                    <span>live_feed.log</span>
+                    <span class="dots"><span></span><span></span><span></span></span>
+                </div>
+                <div class="log-body" id="log-body"></div>
+            </div>
+        </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" class="sec sec-border">
         <p class="sec-tag">capabilities</p>
-        <h2 class="sec-title fi">Attack <em>&</em> Defense Matrix</h2>
+        <h2 class="sec-title fi">Detection <em>&</em> Defense Capabilities</h2>
         <div class="skills-grid">
-            <div class="sk fi"><span class="sk-num">01</span>
-                <div class="sk-ico">⚡</div>
+            <div class="sk fi">
+                <p class="sk-code">CAT · OFFENSIVE-RECON</p>
                 <p class="sk-name">Penetration Testing</p>
-                <p class="sk-desc">Full-scope red team ops — external, internal, social engineering. I own the entire
-                    kill chain.</p>
+                <p class="sk-desc">Full-scope engagements — external, internal, social engineering. Understanding the
+                    attack path is how I know what to defend first.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>95%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="95"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">Metasploit</span><span
-                        class="tag on">Cobalt Strike</span><span class="tag">Burp Suite</span><span
-                        class="tag">Nmap</span></div>
+                <div class="tags"><span class="tag on">Metasploit</span><span class="tag on">Cobalt Strike</span><span
+                        class="tag">Burp Suite</span><span class="tag">Nmap</span></div>
             </div>
-            <div class="sk fi"><span class="sk-num">02</span>
-                <div class="sk-ico">🔐</div>
+            <div class="sk fi">
+                <p class="sk-code">CAT · APPLICATION</p>
                 <p class="sk-name">Web App Security</p>
-                <p class="sk-desc">OWASP Top 10, API exploitation, auth bypass, business logic. If it runs in a browser,
-                    I find the crack.</p>
+                <p class="sk-desc">OWASP Top 10, API exploitation, auth bypass, business logic flaws — where most
+                    real-world breaches actually start.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>92%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="92"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">SQLi</span><span
-                        class="tag on">XSS</span><span class="tag">SSRF</span><span class="tag">IDOR</span><span
-                        class="tag">OAuth</span></div>
+                <div class="tags"><span class="tag on">SQLi</span><span class="tag on">XSS</span><span
+                        class="tag">SSRF</span><span class="tag">IDOR</span><span class="tag">OAuth</span></div>
             </div>
-            <div class="sk fi"><span class="sk-num">03</span>
-                <div class="sk-ico">📡</div>
+            <div class="sk fi">
+                <p class="sk-code">CAT · NETWORK</p>
                 <p class="sk-name">Network Security</p>
-                <p class="sk-desc">Traffic analysis, protocol abuse, wireless attacks, and full Active Directory
-                    compromise chains.</p>
+                <p class="sk-desc">Traffic analysis, protocol abuse, wireless attacks, and Active Directory compromise
+                    chains — read and reconstructed.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>88%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="88"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">Wireshark</span><span
-                        class="tag">BloodHound</span><span class="tag">Responder</span><span class="tag">Mimikatz</span>
-                </div>
+                <div class="tags"><span class="tag on">Wireshark</span><span class="tag">BloodHound</span><span
+                        class="tag">Responder</span><span class="tag">Mimikatz</span></div>
             </div>
-            <div class="sk fi"><span class="sk-num">04</span>
-                <div class="sk-ico">💀</div>
+            <div class="sk fi">
+                <p class="sk-code">CAT · MALWARE</p>
                 <p class="sk-name">Malware Analysis</p>
-                <p class="sk-desc">Static + dynamic analysis of malicious binaries. Reverse engineering, sandbox
-                    evasion, YARA rules.</p>
+                <p class="sk-desc">Static and dynamic analysis of malicious binaries — reverse engineering, sandbox
+                    evasion, and YARA rule authoring.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>80%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="80"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">IDA Pro</span><span
-                        class="tag on">Ghidra</span><span class="tag">x64dbg</span><span class="tag">YARA</span></div>
+                <div class="tags"><span class="tag on">IDA Pro</span><span class="tag on">Ghidra</span><span
+                        class="tag">x64dbg</span><span class="tag">YARA</span></div>
             </div>
-            <div class="sk fi"><span class="sk-num">05</span>
-                <div class="sk-ico">☁️</div>
+            <div class="sk fi">
+                <p class="sk-code">CAT · CLOUD</p>
                 <p class="sk-name">Cloud Security</p>
-                <p class="sk-desc">AWS/Azure/GCP misconfigs, IAM privilege escalation, container escape, serverless
-                    exploitation.</p>
+                <p class="sk-desc">AWS / Azure / GCP misconfigurations, IAM privilege escalation, container escape,
+                    serverless exploitation.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>85%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="85"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">AWS</span><span
-                        class="tag">Terraform</span><span class="tag">Pacu</span><span class="tag">Prowler</span></div>
+                <div class="tags"><span class="tag on">AWS</span><span class="tag">Terraform</span><span
+                        class="tag">Pacu</span><span class="tag">Prowler</span></div>
             </div>
-            <div class="sk fi"><span class="sk-num">06</span>
-                <div class="sk-ico">⚙️</div>
-                <p class="sk-name">Exploit Dev</p>
-                <p class="sk-desc">Custom exploit development, shellcode, PoC to production weaponization. Stack
-                    overflows to modern bypasses.</p>
+            <div class="sk fi">
+                <p class="sk-code">CAT · EXPLOIT-DEV</p>
+                <p class="sk-name">Exploit Development</p>
+                <p class="sk-desc">Custom exploit development and shellcode — from stack overflows to modern mitigation
+                    bypasses, PoC to working weaponization.</p>
                 <div class="bar-wrap">
                     <div class="bar-label"><span>Proficiency</span><span>78%</span></div>
                     <div class="bar-track">
                         <div class="bar-fill" data-w="78"></div>
                     </div>
                 </div>
-                <div class="tags" style="margin-top:0.75rem"><span class="tag on">Python</span><span
-                        class="tag on">C</span><span class="tag">Go</span><span class="tag">ASM</span><span
-                        class="tag">ROP</span></div>
+                <div class="tags"><span class="tag on">Python</span><span class="tag on">C</span><span
+                        class="tag">Go</span><span class="tag">ASM</span><span class="tag">ROP</span></div>
             </div>
         </div>
     </section>
@@ -961,119 +930,75 @@
     <section id="projects" class="sec sec-border">
         <p class="sec-tag">selected work</p>
         <h2 class="sec-title fi">Projects <em>&</em> Research</h2>
-
         <div class="proj-list">
-
-            ```
             <div class="proj fi">
                 <div>
-                    <p class="p-id">PROJECT_001 // BLUE TEAM</p>
+                    <p class="p-id">PROJ-001 <span class="sev">// BLUE TEAM</span></p>
                     <h3 class="p-name">Cross-HoneyPot</h3>
-                    <p class="p-desc">
-                        Cross-platform cybersecurity honeypot and host monitoring framework built for Linux and Windows.
-                        Features process monitoring, file monitoring, threat scoring, honeypot services, centralized
-                        logging, and a Flask-based dashboard for real-time security monitoring.
-                    </p>
-                    <div class="p-stack">
-                        <span class="badge">Python</span>
-                        <span class="badge">Flask</span>
-                        <span class="badge">Watchdog</span>
-                        <span class="badge">Blue Team</span>
-                    </div>
+                    <p class="p-desc">Cross-platform honeypot and host-monitoring framework for Linux and Windows.
+                        Process and file monitoring, threat scoring, honeypot services, centralized logging, and a Flask
+                        dashboard for real-time monitoring.</p>
+                    <div class="p-stack"><span class="badge">Python</span><span class="badge">Flask</span><span
+                            class="badge">Watchdog</span><span class="badge">Blue Team</span></div>
                 </div>
-                <div class="p-links">
-                    <a href="https://github.com/Shreyas-hack245/Cross-HoneyPot" class="p-link"
-                        target="_blank">GitHub</a>
-                </div>
+                <div class="p-links"><a href="https://github.com/Shreyas-hack245/Cross-HoneyPot" class="p-link"
+                        target="_blank">GitHub</a></div>
             </div>
 
             <div class="proj fi">
                 <div>
-                    <p class="p-id">PROJECT_002 // THREAT HUNTING</p>
+                    <p class="p-id">PROJ-002 <span class="sev">// THREAT HUNTING</span></p>
                     <h3 class="p-name">Linux Threat Hunter</h3>
-                    <p class="p-desc">
-                        Blue Team security toolkit built using Bash scripting for Linux threat hunting and incident
-                        response. Detects suspicious processes, failed logins, persistence mechanisms, malware
-                        indicators, and generates automated security reports.
-                    </p>
-                    <div class="p-stack">
-                        <span class="badge">Bash</span>
-                        <span class="badge">Linux</span>
-                        <span class="badge">Threat Hunting</span>
-                        <span class="badge">SOC</span>
-                    </div>
+                    <p class="p-desc">Bash-based blue team toolkit for Linux threat hunting and incident response.
+                        Detects suspicious processes, failed logins, persistence mechanisms, and malware indicators,
+                        then generates automated reports.</p>
+                    <div class="p-stack"><span class="badge">Bash</span><span class="badge">Linux</span><span
+                            class="badge">Threat Hunting</span><span class="badge">SOC</span></div>
                 </div>
-                <div class="p-links">
-                    <a href="#" class="p-link">GitHub</a>
-                </div>
+                <div class="p-links"><a href="#" class="p-link">GitHub</a></div>
             </div>
 
             <div class="proj fi">
                 <div>
-                    <p class="p-id">PROJECT_003 // ENDPOINT SECURITY</p>
+                    <p class="p-id">PROJ-003 <span class="sev">// ENDPOINT SECURITY</span></p>
                     <h3 class="p-name">TermiWatch</h3>
-                    <p class="p-desc">
-                        Real-time endpoint security tool for Windows that intercepts and analyzes terminal processes at
-                        creation time using WMI events. Provides forensic visibility into command execution and
-                        suspicious activity.
-                    </p>
-                    <div class="p-stack">
-                        <span class="badge">Python</span>
-                        <span class="badge">Windows</span>
-                        <span class="badge">WMI</span>
-                        <span class="badge">Endpoint Security</span>
-                    </div>
+                    <p class="p-desc">Real-time endpoint security tool for Windows that intercepts terminal processes at
+                        creation time via WMI events, giving forensic visibility into command execution and suspicious
+                        activity.</p>
+                    <div class="p-stack"><span class="badge">Python</span><span class="badge">Windows</span><span
+                            class="badge">WMI</span><span class="badge">Endpoint Security</span></div>
                 </div>
-                <div class="p-links">
-                    <a href="https://github.com/Shreyas-hack245/Termi-Watch" class="p-link" target="_blank">GitHub</a>
-                </div>
+                <div class="p-links"><a href="https://github.com/Shreyas-hack245/Termi-Watch" class="p-link"
+                        target="_blank">GitHub</a></div>
             </div>
 
             <div class="proj fi">
                 <div>
-                    <p class="p-id">PROJECT_004 // VULNERABILITY ASSESSMENT</p>
+                    <p class="p-id">PROJ-004 <span class="sev">// VULN ASSESSMENT</span></p>
                     <h3 class="p-name">Python Network Auditor</h3>
-                    <p class="p-desc">
-                        Automated security auditing tool that scans all ports, identifies running services, maps them to
-                        known CVEs using threat intelligence APIs, and generates PDF security reports.
-                    </p>
-                    <div class="p-stack">
-                        <span class="badge">Python</span>
-                        <span class="badge">Nmap</span>
-                        <span class="badge">CVE</span>
-                        <span class="badge">PDF Reports</span>
-                    </div>
+                    <p class="p-desc">Automated auditing tool that scans all ports, identifies running services, maps
+                        them to known CVEs via threat-intel APIs, and generates PDF security reports.</p>
+                    <div class="p-stack"><span class="badge">Python</span><span class="badge">Nmap</span><span
+                            class="badge">CVE</span><span class="badge">PDF Reports</span></div>
                 </div>
-                <div class="p-links">
-                    <a href="https://github.com/Shreyas-hack245/Local-Vulnerability-Scanner-using-Python-Nmap"
-                        class="p-link" target="_blank">GitHub</a>
-                </div>
+                <div class="p-links"><a
+                        href="https://github.com/Shreyas-hack245/Local-Vulnerability-Scanner-using-Python-Nmap"
+                        class="p-link" target="_blank">GitHub</a></div>
             </div>
 
             <div class="proj fi">
                 <div>
-                    <p class="p-id">PROJECT_005 // API SECURITY</p>
+                    <p class="p-id">PROJ-005 <span class="sev">// API SECURITY</span></p>
                     <h3 class="p-name">Secure API Gateway</h3>
-                    <p class="p-desc">
-                        Security-focused API gateway featuring JWT authentication, DDoS protection, rate limiting,
-                        threat detection, attacker analytics, and MongoDB-based logging.
-                    </p>
-                    <div class="p-stack">
-                        <span class="badge">Node.js</span>
-                        <span class="badge">Express</span>
-                        <span class="badge">MongoDB</span>
-                        <span class="badge">Threat Detection</span>
-                    </div>
+                    <p class="p-desc">Security-focused API gateway with JWT authentication, DDoS protection, rate
+                        limiting, threat detection, attacker analytics, and MongoDB-based logging.</p>
+                    <div class="p-stack"><span class="badge">Node.js</span><span class="badge">Express</span><span
+                            class="badge">MongoDB</span><span class="badge">Threat Detection</span></div>
                 </div>
-                <div class="p-links">
-                    <a href="#" class="p-link">GitHub</a>
-                </div>
+                <div class="p-links"><a href="#" class="p-link">GitHub</a></div>
             </div>
-            ```
-
         </div>
     </section>
-
 
     <!-- CERTS -->
     <section id="certs" class="sec sec-border">
@@ -1113,192 +1038,159 @@
         <p class="sec-tag">get in touch</p>
         <h2 class="sec-title fi">Open to <em>Blue Team</em> Roles</h2>
         <div class="ct-box fi">
-            <p class="ct-line"><span class="ct-k">$ cat /etc/contact.conf</span></p><br />
-            <p class="ct-line"><span class="ct-k">EMAIL&nbsp;&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v"><a
+            <p class="ct-line"><span class="ct-k">EMAIL</span><span class="ct-v"><a
                         href="mailto:shreyasbhat404@gmail.com">shreyasbhat404@gmail.com</a></span></p>
-            <p class="ct-line"><span class="ct-k">GITHUB&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v"><a
-                        href="https://github.com/Shreyas-hack245" target="_blank">github.com/Shreyas-hack245</a></span></p>
-            <p class="ct-line"><span class="ct-k">LINKEDIN :: </span><span class="ct-v"><a href="https://linkedin.com/in/shreyas-bhat-488383369"
+            <p class="ct-line"><span class="ct-k">GITHUB</span><span class="ct-v"><a
+                        href="https://github.com/Shreyas-hack245" target="_blank">github.com/Shreyas-hack245</a></span>
+            </p>
+            <p class="ct-line"><span class="ct-k">LINKEDIN</span><span class="ct-v"><a
+                        href="https://linkedin.com/in/shreyas-bhat-488383369"
                         target="_blank">linkedin.com/in/shreyas-bhat-488383369</a></span></p>
-            <p class="ct-line"><span class="ct-k">TWITTER&nbsp;&nbsp; :: </span><span class="ct-v"><a href="https://twitter.com/shreyasbhat404"
-                        target="_blank">@shreyasbhat404</a></span></p>
-                <p class="ct-line"><span class="ct-k">DISCORD&nbsp;&nbsp; :: </span><span class="ct-v"><a href="#" id="discord-btn">shreyasbhat045</a> <span id="discord-copied" style="margin-left:0.5rem;color:var(--txd);display:none;">copied</span></span></p>
-            <p class="ct-line"><span class="ct-k">PGP KEY&nbsp;&nbsp; :: </span><span class="ct-v">0xDEADBEEF</span></p>
-            <br />
-            <p class="ct-line"><span class="ct-k">$ </span><span class="blink"></span></p>
+            <p class="ct-line"><span class="ct-k">TWITTER</span><span class="ct-v"><a
+                        href="https://twitter.com/shreyasbhat404" target="_blank">@shreyasbhat404</a></span></p>
+            <p class="ct-line"><span class="ct-k">DISCORD</span><span class="ct-v"><a href="#"
+                        id="discord-btn">shreyasbhat045</a> <span id="discord-copied"
+                        style="margin-left:0.5rem;color:var(--ink-faint);display:none;">copied</span></span></p>
+            <p class="ct-line"><span class="ct-k">PGP KEY</span><span class="ct-v">0xDEADBEEF</span></p>
         </div>
-        <!-- Simple client-side contact form -->
-        <form id="contact-form" style="margin-top:1rem; display:block;"> 
-            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">NAME&nbsp;&nbsp;&nbsp;&nbsp; :: </span>
-                <input id="cname" type="text" required placeholder="Your name" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;" />
-            </label>
-            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">EMAIL&nbsp;&nbsp;&nbsp; :: </span>
-                <input id="cemail" type="email" required placeholder="you@example.com" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;" />
-            </label>
-            <label class="ct-line" style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:0.6rem;"><span class="ct-k">MESSAGE&nbsp; :: </span>
-                <textarea id="cmsg" rows="4" required placeholder="Hi — write your message" style="padding:0.5rem;border:1px solid var(--bd);background:transparent;color:var(--tx);outline:none;cursor:auto;"></textarea>
-            </label>
-            <div style="margin-top:0.6rem;">
-                <button type="submit" class="btn"><span>[ submit ]</span></button>
-            </div>
+
+        <form id="contact-form">
+            <label>Name<input id="cname" type="text" required placeholder="Your name" /></label>
+            <label>Email<input id="cemail" type="email" required placeholder="you@example.com" /></label>
+            <label>Message<textarea id="cmsg" rows="4" required
+                    placeholder="Hi — write your message"></textarea></label>
+            <div style="margin-top:0.6rem;"><button type="submit" class="btn"><span>Submit</span></button></div>
         </form>
 
-        <!-- Display area for submitted details -->
-        <div id="contact-output" style="margin-top:1rem; display:none;"></div>
-        <div class="btns">
-            <a href="mailto:shreyasbhat404@gmail.com" class="btn"><span>[ send_message ]</span></a>
-            <a href="https://github.com/Shreyas-hack245" class="btn btn-dim" target="_blank"><span>[ github_profile
-                    ]</span></a>
+        <div id="contact-output"></div>
+
+        <div class="btns" style="margin-top:1.5rem;">
+            <a href="mailto:shreyasbhat404@gmail.com" class="btn"><span>Send Message</span></a>
+            <a href="https://github.com/Shreyas-hack245" class="btn btn-dim" target="_blank"><span>GitHub
+                    Profile</span></a>
         </div>
     </section>
 
-    <footer>[ crafted with entropy &amp; caffeine ] — root@0xSHREYAS — <span id="yr"></span></footer>
+    <footer>SHREYAS BHAT · SECURITY ANALYST · <span id="yr"></span></footer>
 
-    <!-- THREE.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // ── CURSOR ──
-        const cur = document.getElementById('cur'), cdot = document.getElementById('cdot');
-        let mx = 0, my = 0, cx = 0, cy = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cdot.style.left = mx + 'px'; cdot.style.top = my + 'px'; });
-        document.querySelectorAll('a,button').forEach(el => {
-            el.addEventListener('mouseenter', () => cur.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
-        });
-        (function animCursor() {
-            cx += (mx - cx) * 0.12; cy += (my - cy) * 0.12;
-            cur.style.left = cx + 'px'; cur.style.top = cy + 'px';
-            requestAnimationFrame(animCursor);
-        })();
-
-        // ── THREE.JS SCENE ──
+        // ── THREE.JS: NETWORK TOPOLOGY GRAPH ──
         const canvas = document.getElementById('bg-canvas');
         const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 2000);
-        camera.position.set(0, 0, 80);
+        const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 2000);
+        camera.position.set(0, 0, 95);
 
-        // Mouse parallax target
         let tmx = 0, tmy = 0;
-        document.addEventListener('mousemove', e => { tmx = (e.clientX / innerWidth - 0.5) * 2; tmy = -(e.clientY / innerHeight - 0.5) * 2; });
+        document.addEventListener('mousemove', e => {
+            tmx = (e.clientX / innerWidth - 0.5) * 2;
+            tmy = -(e.clientY / innerHeight - 0.5) * 2;
+        });
 
-        // ── 1. PARTICLE FIELD ──
-        const PARTS = 2200;
-        const pGeo = new THREE.BufferGeometry();
-        const pos = new Float32Array(PARTS * 3);
-        const vel = new Float32Array(PARTS * 3);
-        for (let i = 0; i < PARTS; i++) {
-            pos[i * 3] = (Math.random() - 0.5) * 300;
-            pos[i * 3 + 1] = (Math.random() - 0.5) * 200;
-            pos[i * 3 + 2] = (Math.random() - 0.5) * 200;
-            vel[i * 3] = (Math.random() - 0.5) * 0.02;
-            vel[i * 3 + 1] = (Math.random() - 0.5) * 0.02;
-            vel[i * 3 + 2] = (Math.random() - 0.5) * 0.01;
+        const graph = new THREE.Group();
+        scene.add(graph);
+
+        const NODE_COUNT = 26;
+        const nodePositions = [];
+        const nodeMeshes = [];
+        const BLUE = new THREE.Color(0x5b8cff);
+        const AMBER = new THREE.Color(0xffb020);
+        const RED = new THREE.Color(0xff5c5c);
+        const GREEN = new THREE.Color(0x3ddc84);
+
+        const nodeGeo = new THREE.SphereGeometry(0.9, 10, 10);
+        for (let i = 0; i < NODE_COUNT; i++) {
+            const r = 55 + Math.random() * 20;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            const x = r * Math.sin(phi) * Math.cos(theta);
+            const y = r * Math.sin(phi) * Math.sin(theta) * 0.6;
+            const z = r * Math.cos(phi) * 0.6 - 30;
+            nodePositions.push(new THREE.Vector3(x, y, z));
+
+            const mat = new THREE.MeshBasicMaterial({ color: BLUE.clone(), transparent: true, opacity: 0.55 });
+            const mesh = new THREE.Mesh(nodeGeo, mat);
+            mesh.position.set(x, y, z);
+            graph.add(mesh);
+            nodeMeshes.push(mesh);
         }
-        pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        const pMat = new THREE.PointsMaterial({ color: 0x00ff88, size: 0.4, transparent: true, opacity: 0.6 });
-        const particles = new THREE.Points(pGeo, pMat);
-        scene.add(particles);
 
-        // ── 2. CONNECTION LINES between nearby particles ──
-        const LINE_DIST = 22;
-        const linePts = [];
-        for (let i = 0; i < 400; i++) {
-            const j = (i + 1 + Math.floor(Math.random() * 8)) % 400;
-            const dx = pos[i * 3] - pos[j * 3], dy = pos[i * 3 + 1] - pos[j * 3 + 1], dz = pos[i * 3 + 2] - pos[j * 3 + 2];
-            if (Math.sqrt(dx * dx + dy * dy + dz * dz) < LINE_DIST) {
-                linePts.push(new THREE.Vector3(pos[i * 3], pos[i * 3 + 1], pos[i * 3 + 2]));
-                linePts.push(new THREE.Vector3(pos[j * 3], pos[j * 3 + 1], pos[j * 3 + 2]));
-            }
-        }
-        const lineGeo = new THREE.BufferGeometry().setFromPoints(linePts);
-        const lineMat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.08 });
-        const lines = new THREE.LineSegments(lineGeo, lineMat);
-        scene.add(lines);
-
-        // ── 3. WIREFRAME ICOSAHEDRON (hero centerpiece) ──
-        const icoGeo = new THREE.IcosahedronGeometry(18, 1);
-        const icoMat = new THREE.MeshBasicMaterial({ color: 0x00ff88, wireframe: true, transparent: true, opacity: 0.12 });
-        const ico = new THREE.Mesh(icoGeo, icoMat);
-        ico.position.set(30, -5, 10);
-        scene.add(ico);
-
-        // ── 4. SECOND WIREFRAME — octahedron ──
-        const octGeo = new THREE.OctahedronGeometry(10, 0);
-        const octMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.1 });
-        const oct = new THREE.Mesh(octGeo, octMat);
-        oct.position.set(-40, 15, -20);
-        scene.add(oct);
-
-        // ── 5. TORUS ──
-        const torGeo = new THREE.TorusGeometry(14, 0.4, 8, 48);
-        const torMat = new THREE.MeshBasicMaterial({ color: 0x00ff88, wireframe: false, transparent: true, opacity: 0.07 });
-        const tor = new THREE.Mesh(torGeo, torMat);
-        tor.rotation.x = Math.PI / 3;
-        tor.position.set(-20, -20, 0);
-        scene.add(tor);
-
-        // ── 6. HEX GRID PLANE (faint ground) ──
-        function hexGrid() {
-            const g = new THREE.Group();
-            const mat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.04 });
-            const rows = 8, cols = 10, r = 8;
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = col * r * 1.732 + (row % 2) * r * 0.866 - cols * r * 0.866;
-                    const z = row * r * 1.5 - rows * r * 0.75;
-                    const pts = [];
-                    for (let a = 0; a < 7; a++) {
-                        const ang = Math.PI / 180 * (60 * a - 30);
-                        pts.push(new THREE.Vector3(x + r * Math.cos(ang) * 0.48, 0, z + r * Math.sin(ang) * 0.48));
-                    }
-                    g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat));
+        // edges — connect each node to its nearest few neighbors
+        const linePositions = [];
+        const lineColors = [];
+        const EDGE_DIST = 42;
+        for (let i = 0; i < NODE_COUNT; i++) {
+            let count = 0;
+            for (let j = i + 1; j < NODE_COUNT && count < 3; j++) {
+                if (nodePositions[i].distanceTo(nodePositions[j]) < EDGE_DIST) {
+                    linePositions.push(nodePositions[i].x, nodePositions[i].y, nodePositions[i].z);
+                    linePositions.push(nodePositions[j].x, nodePositions[j].y, nodePositions[j].z);
+                    count++;
                 }
             }
-            g.rotation.x = -Math.PI / 2.5;
-            g.position.set(0, -40, 0);
-            return g;
         }
-        scene.add(hexGrid());
+        const lineGeo = new THREE.BufferGeometry();
+        lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        const lineMat = new THREE.LineBasicMaterial({ color: 0x5b8cff, transparent: true, opacity: 0.1 });
+        graph.add(new THREE.LineSegments(lineGeo, lineMat));
 
-        // ── ANIMATE ──
-        let t = 0;
+        // faint ambient particle drift behind the graph
+        const PARTS = 500;
+        const pPos = new Float32Array(PARTS * 3);
+        for (let i = 0; i < PARTS; i++) {
+            pPos[i * 3] = (Math.random() - 0.5) * 320;
+            pPos[i * 3 + 1] = (Math.random() - 0.5) * 220;
+            pPos[i * 3 + 2] = (Math.random() - 0.5) * 260 - 60;
+        }
+        const pGeo = new THREE.BufferGeometry();
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+        const pMat = new THREE.PointsMaterial({ color: 0x4c5364, size: 0.6, transparent: true, opacity: 0.35 });
+        scene.add(new THREE.Points(pGeo, pMat));
+
+        // periodic "detection" pulse on a random node: blue -> red -> amber -> green -> blue
+        let activePulse = null;
+        function triggerPulse() {
+            const idx = Math.floor(Math.random() * NODE_COUNT);
+            activePulse = { idx, start: performance.now() };
+        }
+        setInterval(triggerPulse, 2600);
+        triggerPulse();
+
+        function updatePulse(now) {
+            if (!activePulse) return;
+            const elapsed = now - activePulse.start;
+            const dur = 2200;
+            const mesh = nodeMeshes[activePulse.idx];
+            if (elapsed > dur) { mesh.material.color.copy(BLUE); mesh.material.opacity = 0.55; activePulse = null; return; }
+            const p = elapsed / dur;
+            let c;
+            if (p < 0.25) c = RED.clone().lerp(AMBER, p / 0.25);
+            else if (p < 0.6) c = AMBER.clone().lerp(GREEN, (p - 0.25) / 0.35);
+            else c = GREEN.clone().lerp(BLUE, (p - 0.6) / 0.4);
+            mesh.material.color.copy(c);
+            mesh.material.opacity = 0.55 + Math.sin(p * Math.PI) * 0.4;
+        }
+
         const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
             const dt = clock.getDelta();
-            t += dt;
 
-            // Drift particles
-            const pa = pGeo.attributes.position.array;
-            for (let i = 0; i < PARTS; i++) {
-                pa[i * 3] += vel[i * 3]; pa[i * 3 + 1] += vel[i * 3 + 1]; pa[i * 3 + 2] += vel[i * 3 + 2];
-                if (pa[i * 3] > 150 || pa[i * 3] < -150) vel[i * 3] *= -1;
-                if (pa[i * 3 + 1] > 100 || pa[i * 3 + 1] < -100) vel[i * 3 + 1] *= -1;
-                if (pa[i * 3 + 2] > 100 || pa[i * 3 + 2] < -100) vel[i * 3 + 2] *= -1;
-            }
-            pGeo.attributes.position.needsUpdate = true;
+            graph.rotation.y += dt * 0.045;
+            graph.rotation.x = Math.sin(clock.elapsedTime * 0.06) * 0.08;
 
-            // Rotate shapes
-            ico.rotation.x += dt * 0.12; ico.rotation.y += dt * 0.18;
-            oct.rotation.x += dt * 0.2; oct.rotation.z += dt * 0.15;
-            tor.rotation.z += dt * 0.08; tor.rotation.y += dt * 0.05;
-
-            // Camera parallax from mouse
-            camera.position.x += (tmx * 12 - camera.position.x) * 0.04;
-            camera.position.y += (tmy * 8 - camera.position.y) * 0.04;
+            camera.position.x += (tmx * 10 - camera.position.x) * 0.03;
+            camera.position.y += (tmy * 6 - camera.position.y) * 0.03;
             camera.lookAt(scene.position);
 
-            // Scroll-driven camera depth
             const scrollFrac = window.scrollY / (document.body.scrollHeight - innerHeight || 1);
-            camera.position.z = 80 - scrollFrac * 30;
+            camera.position.z = 95 - scrollFrac * 25;
 
-            // Pulse opacity on ico
-            icoMat.opacity = 0.08 + Math.sin(t * 0.8) * 0.06;
-            pMat.opacity = 0.5 + Math.sin(t * 0.5) * 0.2;
+            updatePulse(performance.now());
 
             renderer.render(scene, camera);
         }
@@ -1317,18 +1209,19 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fi').forEach(el => obs.observe(el));
 
-        // ── COUNT-UP ANIMATION ──
+        // ── COUNT-UP ──
         function countUp(el) {
             const target = +el.dataset.count;
-            const pre = el.dataset.prefix || '';
-            const suf = el.dataset.suffix || '';
-            let start = 0; const dur = 1800; const startTime = performance.now();
-            (function step(now) {
+            let startTime = null;
+            const dur = 1500;
+            function step(now) {
+                if (!startTime) startTime = now;
                 const p = Math.min((now - startTime) / dur, 1);
                 const ease = 1 - Math.pow(1 - p, 3);
-                el.textContent = pre + Math.round(ease * target) + suf;
+                el.textContent = Math.round(ease * target);
                 if (p < 1) requestAnimationFrame(step);
-            })(performance.now());
+            }
+            requestAnimationFrame(step);
         }
         const statObs = new IntersectionObserver(entries => {
             entries.forEach(e => {
@@ -1351,14 +1244,44 @@
         }, { threshold: 0.2 });
         document.querySelectorAll('.skills-grid').forEach(el => barObs.observe(el));
 
-        // ── YEAR ──
         document.getElementById('yr').textContent = new Date().getFullYear();
+
+        // ── LIVE DETECTION LOG (signature element) ──
+        (function () {
+            const body = document.getElementById('log-body');
+            if (!body) return;
+            const rules = ['T1059-PowerShell-Encoded', 'T1110-Brute-Force', 'T1046-Port-Scan', 'T1021-RDP-Lateral', 'T1071-C2-Beacon', 'T1003-Credential-Dump', 'T1566-Phishing-Link'];
+            const severities = [
+                { tag: 'INFO', cls: 'sev-info' },
+                { tag: 'HIGH', cls: 'sev-high' },
+                { tag: 'CRIT', cls: 'sev-crit' },
+            ];
+            const statuses = ['MONITORING', 'TRIAGED', 'CONTAINED', 'ESCALATED'];
+            function randIp() { return `10.${Math.floor(Math.random() * 4) + 1}.${Math.floor(Math.random() * 40)}.${Math.floor(Math.random() * 250)}`; }
+            function ts() {
+                const d = new Date();
+                return d.toTimeString().slice(0, 8);
+            }
+            function addLine() {
+                const sev = severities[Math.floor(Math.random() * severities.length)];
+                const rule = rules[Math.floor(Math.random() * rules.length)];
+                const ip = randIp();
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                const line = document.createElement('div');
+                line.className = 'log-line';
+                line.innerHTML = `<span class="ts">[${ts()}]</span> <span class="${sev.cls}">${sev.tag}</span> src:${ip} rule:${rule} status:${status}`;
+                body.prepend(line);
+                while (body.children.length > 40) body.removeChild(body.lastChild);
+            }
+            for (let i = 0; i < 10; i++) addLine();
+            setInterval(addLine, 1400);
+        })();
 
         // ── CONTACT FORM HANDLER ──
         (function () {
             const form = document.getElementById('contact-form');
             const out = document.getElementById('contact-output');
-            function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
+            function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;" }[c])); }
             if (!form || !out) return;
             form.addEventListener('submit', e => {
                 e.preventDefault();
@@ -1367,13 +1290,14 @@
                 const msg = document.getElementById('cmsg').value.trim();
                 const card = document.createElement('div');
                 card.className = 'ct-box';
-                card.innerHTML = `\n                    <p class="ct-line"><span class="ct-k">NAME&nbsp;&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v">${escapeHtml(name)}</span></p>\n                    <p class="ct-line"><span class="ct-k">EMAIL&nbsp;&nbsp;&nbsp; :: </span><span class="ct-v">${escapeHtml(email)}</span></p>\n                    <p class="ct-line"><span class="ct-k">MESSAGE&nbsp; :: </span><span class="ct-v">${escapeHtml(msg).replace(/\n/g,'<br/>')}</span></p>`;
+                card.innerHTML = `<p class="ct-line"><span class="ct-k">NAME</span><span class="ct-v">${escapeHtml(name)}</span></p>
+                    <p class="ct-line"><span class="ct-k">EMAIL</span><span class="ct-v">${escapeHtml(email)}</span></p>
+                    <p class="ct-line"><span class="ct-k">MESSAGE</span><span class="ct-v">${escapeHtml(msg).replace(/\n/g, '<br/>')}</span></p>`;
                 out.style.display = 'block';
                 out.prepend(card);
                 form.reset();
             });
 
-            // Discord copy-to-clipboard handler
             const discordBtn = document.getElementById('discord-btn');
             const discordCopied = document.getElementById('discord-copied');
             if (discordBtn) {
@@ -1383,10 +1307,10 @@
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(handle).then(() => {
                             if (discordCopied) { discordCopied.style.display = 'inline'; setTimeout(() => discordCopied.style.display = 'none', 1500); }
-                        }).catch(() => {});
+                        }).catch(() => { });
                     } else {
                         const ta = document.createElement('textarea'); ta.value = handle; document.body.appendChild(ta); ta.select();
-                        try { document.execCommand('copy'); if (discordCopied) { discordCopied.style.display = 'inline'; setTimeout(() => discordCopied.style.display = 'none', 1500); } } catch (err) {}
+                        try { document.execCommand('copy'); if (discordCopied) { discordCopied.style.display = 'inline'; setTimeout(() => discordCopied.style.display = 'none', 1500); } } catch (err) { }
                         ta.remove();
                     }
                 });
