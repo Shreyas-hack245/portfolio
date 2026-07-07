@@ -3,455 +3,380 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>[Your Name] — Security Researcher</title>
+<title>[Shreyas] — Security Guy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
  
     :root {
-        --bg: #121012;
-        --bg2: #171516;
-        --ink: #ede9e3;
-        --ink-dim: #a19a8f;
-        --ink-faint: #5c574f;
-        --line: rgba(237, 233, 227, 0.1);
-        --accent: #c9743b;
-        --serif: 'Fraunces', serif;
-        --sans: 'Inter', sans-serif;
+        --bg: #faf9f6;
+        --panel: #ffffff;
+        --ink: #171a21;
+        --ink-dim: #5b6472;
+        --ink-faint: #9198a3;
+        --line: #e7e4dd;
+        --accent: #2c5f6f;
+        --accent-tint: #eaf1f2;
+        --brass: #a9713a;
+        --ease: cubic-bezier(.19,1,.22,1);
+        --serif: 'Newsreader', serif;
+        --sans: 'Public Sans', sans-serif;
         --mono: 'IBM Plex Mono', monospace;
     }
- 
-    html { scroll-behavior: smooth; }
  
     body {
         background: var(--bg);
         color: var(--ink);
         font-family: var(--sans);
-        font-weight: 300;
-        font-size: 17px;
+        font-size: 16px;
+        line-height: 1.5;
     }
  
     a { color: inherit; }
  
+    #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 200; }
+ 
     /* NAV */
     nav {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.6rem 3rem;
-        background: rgba(18, 16, 18, 0.85);
-        backdrop-filter: blur(8px);
+        position: sticky; top: 0; z-index: 100;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1.1rem 3rem;
+        background: rgba(250, 249, 246, 0.88);
+        backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--line);
     }
  
-    .nlogo { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; letter-spacing: 0.01em; }
+    .brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; }
  
-    nav ul { list-style: none; display: flex; gap: 2.4rem; }
- 
-    nav a {
-        text-decoration: none;
-        font-size: 0.82rem;
-        color: var(--ink-dim);
+    .nav-links-wrap { position: relative; }
+    #nav-links { list-style: none; display: flex; gap: 0.3rem; position: relative; }
+    #nav-pill {
+        position: absolute; top: 0; height: 100%; background: var(--accent-tint);
+        border-radius: 6px; transition: left 0.35s var(--ease), width 0.35s var(--ease);
+        z-index: 0;
+    }
+    #nav-links a {
+        position: relative; z-index: 1;
+        text-decoration: none; font-size: 0.85rem; color: var(--ink-dim);
+        padding: 0.5rem 0.85rem; display: block; border-radius: 6px;
         transition: color 0.2s;
     }
+    #nav-links a:hover { color: var(--ink); }
+    #nav-links a.on { color: var(--accent); font-weight: 500; }
  
-    nav a:hover { color: var(--ink); }
- 
-    .nstatus { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); letter-spacing: 0.04em; }
- 
-    @media (max-width: 780px) {
-        nav ul { display: none; }
-        nav { padding: 1.4rem 1.6rem; }
+    .cta-btn {
+        position: relative; overflow: hidden;
+        font-size: 0.82rem; font-weight: 500; text-decoration: none; color: #fff;
+        background: var(--accent); padding: 0.55rem 1.2rem; border-radius: 6px;
     }
- 
-    /* SHELL */
-    .shell { max-width: 980px; margin: 0 auto; padding: 0 3rem; }
-    @media (max-width: 780px) { .shell { padding: 0 1.6rem; } }
- 
-    /* CHAPTER LABEL */
-    .chapter {
-        display: flex;
-        align-items: baseline;
-        gap: 0.9rem;
-        margin-bottom: 2.6rem;
+    .cta-btn span { position: relative; z-index: 1; }
+    .cta-btn::before {
+        content: ''; position: absolute; inset: 0; background: #1e454f;
+        transform: translateY(101%); transition: transform 0.3s var(--ease);
     }
+    .cta-btn:hover::before { transform: translateY(0); }
  
-    .chapter .num {
-        font-family: var(--serif);
-        font-size: 1.1rem;
-        color: var(--accent);
-        font-weight: 500;
-    }
+    @media (max-width: 860px) { #nav-links { display: none; } nav { padding: 1rem 1.5rem; } }
  
-    .chapter .label {
-        font-family: var(--mono);
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink-faint);
-    }
+    .shell { max-width: 1040px; margin: 0 auto; padding: 0 3rem; }
+    @media (max-width: 860px) { .shell { padding: 0 1.5rem; } }
  
     /* HERO */
-    #hero { padding: 5.5rem 0 6rem; }
+    #hero { padding: 5.5rem 0 5rem; }
+    .hero-grid { display: grid; grid-template-columns: auto 1fr; gap: 2.4rem; align-items: center; }
  
-    .hero-row {
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: 2.5rem;
-        align-items: center;
+    .avatar {
+        width: 108px; height: 108px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--brass));
+        display: flex; align-items: center; justify-content: center;
+        color: #fff; font-family: var(--serif); font-size: 2rem; font-weight: 600;
+        opacity: 0; transform: scale(0.85);
+        animation: popIn 0.7s var(--ease) forwards; animation-delay: 0.1s;
     }
+    @keyframes popIn { to { opacity: 1; transform: scale(1); } }
  
     .h-kicker {
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-        color: var(--ink-faint);
-        margin-bottom: 1.4rem;
+        font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent);
+        text-transform: uppercase; margin-bottom: 0.7rem;
+        opacity: 0; animation: riseIn 0.6s var(--ease) forwards; animation-delay: 0.05s;
     }
  
-    .h-name {
-        font-family: var(--serif);
-        font-size: clamp(2.6rem, 5vw, 4rem);
-        font-weight: 500;
-        line-height: 1.05;
-        margin-bottom: 0.4rem;
-    }
+    .h-name { font-family: var(--serif); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 600; margin-bottom: 0.3rem; }
+    .word-mask { overflow: hidden; display: inline-block; vertical-align: top; }
+    .word-inner { display: inline-block; transform: translateY(115%); animation: riseIn 0.7s var(--ease) forwards; }
+    @keyframes riseIn { to { transform: translateY(0); opacity: 1; } from { opacity: 0; } }
  
     .h-role {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 1.15rem;
-        color: var(--ink-dim);
-        margin-bottom: 2rem;
+        color: var(--ink-dim); font-size: 1.05rem;
+        opacity: 0; animation: riseIn 0.6s var(--ease) forwards; animation-delay: 0.5s;
     }
  
     .h-lede {
-        font-size: 1.02rem;
-        line-height: 1.85;
-        color: var(--ink-dim);
-        max-width: 480px;
-        margin-bottom: 2.4rem;
+        font-size: 1.02rem; line-height: 1.8; color: var(--ink-dim); max-width: 640px; margin: 1.8rem 0 2rem;
+        opacity: 0; animation: riseIn 0.6s var(--ease) forwards; animation-delay: 0.62s;
     }
- 
     .h-lede strong { color: var(--ink); font-weight: 500; }
  
-    .h-facts {
-        display: flex;
-        gap: 2.4rem;
-        margin-bottom: 2.6rem;
-        flex-wrap: wrap;
+    .btn-row {
+        display: flex; gap: 0.9rem; flex-wrap: wrap;
+        opacity: 0; animation: riseIn 0.6s var(--ease) forwards; animation-delay: 0.72s;
     }
- 
-    .fact .fv { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; display: block; line-height: 1; }
-    .fact .fl { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; display: block; }
- 
-    .links-row { display: flex; gap: 2rem; flex-wrap: wrap; }
- 
-    .tlink {
-        font-size: 0.9rem;
-        text-decoration: none;
-        color: var(--ink);
-        border-bottom: 1px solid var(--ink-faint);
-        padding-bottom: 2px;
-        transition: border-color 0.2s, color 0.2s;
+    .btn-outline {
+        position: relative;
+        font-size: 0.85rem; font-weight: 500; text-decoration: none; color: var(--ink);
+        border: 1px solid var(--line); padding: 0.6rem 1.2rem; border-radius: 6px;
+        transition: border-color 0.2s, color 0.2s, transform 0.2s;
     }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
  
-    .tlink:hover { border-color: var(--accent); color: var(--accent); }
+    @media (max-width: 640px) { .hero-grid { grid-template-columns: 1fr; } }
  
-    /* HERO VISUAL — three.js mount, bounded not fullscreen */
-    .hero-visual {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        max-width: 300px;
-        justify-self: center;
+    /* MARQUEE */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+    .marquee-track { display: flex; width: max-content; animation: scrollX 26s linear infinite; }
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track span {
+        font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); white-space: nowrap; padding: 0 1.6rem;
+        border-right: 1px solid var(--line);
     }
+    @keyframes scrollX { from { transform: translateX(0); } to { transform: translateX(-50%); } }
  
-    @media (max-width: 780px) {
-        .hero-row { grid-template-columns: 1fr; }
-        .hero-visual { max-width: 220px; margin-top: 1rem; }
+    /* SECTIONS */
+    .sec { padding: 4.5rem 0; border-top: 1px solid var(--line); }
+    .sec-eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.5rem; }
+    .sec-title { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; margin-bottom: 2.2rem; }
+ 
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+ 
+    /* CAPABILITIES */
+    .toggle-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+    .segmented { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; position: relative; }
+    .seg-btn { font-family: var(--mono); font-size: 0.75rem; padding: 0.5rem 1.1rem; background: var(--panel); border: none; cursor: pointer; color: var(--ink-dim); transition: color 0.25s; position: relative; z-index: 1; }
+    .seg-btn.active { color: #fff; }
+    .seg-pill { position: absolute; top: 0; left: 0; height: 100%; width: 50%; background: var(--accent); transition: transform 0.3s var(--ease); z-index: 0; }
+    .seg-pill.right { transform: translateX(100%); }
+ 
+    .cap-bars { display: flex; flex-direction: column; gap: 1.1rem; }
+    .cap-bar-row { display: grid; grid-template-columns: 190px 1fr 48px; align-items: center; gap: 1rem; }
+    .cap-bar-name { font-size: 0.9rem; font-weight: 500; }
+    .cap-bar-track { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+    .cap-bar-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 4px; transition: width 1.1s var(--ease); }
+    .cap-bar-pct { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); text-align: right; }
+ 
+    @media (max-width: 640px) { .cap-bar-row { grid-template-columns: 1fr; gap: 0.4rem; } .cap-bar-pct { text-align: left; } }
+ 
+    /* CASE STUDIES */
+    .filter-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .filter-chip {
+        font-family: var(--mono); font-size: 0.72rem; padding: 0.4rem 0.9rem; border-radius: 100px;
+        border: 1px solid var(--line); background: var(--panel); cursor: pointer; color: var(--ink-dim);
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
+    .filter-chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
  
-    /* SECTION COMMONS */
-    .sec { padding: 5rem 0; border-top: 1px solid var(--line); }
- 
-    /* CAPABILITIES — report table */
-    .cap-list { display: flex; flex-direction: column; }
- 
-    .cap-row {
-        display: grid;
-        grid-template-columns: 220px 1fr 90px;
-        gap: 1.5rem;
-        align-items: baseline;
-        padding: 1.3rem 0;
-        border-top: 1px solid var(--line);
+    .case-card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+        margin-bottom: 1rem; overflow: hidden;
+        opacity: 0; transform: translateY(14px);
+        transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), max-height 0.3s, border-color 0.2s;
     }
+    .case-card.vis { opacity: 1; transform: translateY(0); }
+    .case-card.hidden { display: none; }
+    .case-card:hover { border-color: #d8d3c9; }
  
-    .cap-row:last-child { border-bottom: 1px solid var(--line); }
+    .case-head { display: flex; justify-content: space-between; align-items: center; padding: 1.3rem 1.6rem; cursor: pointer; }
+    .case-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .case-tags { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); }
  
-    .cap-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; }
-    .cap-desc { font-size: 0.9rem; color: var(--ink-dim); line-height: 1.6; }
-    .cap-level { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); text-align: right; }
- 
-    @media (max-width: 700px) {
-        .cap-row { grid-template-columns: 1fr; gap: 0.5rem; }
-        .cap-level { text-align: left; }
+    .case-toggle {
+        flex-shrink: 0; margin-left: 1rem; width: 26px; height: 26px; border-radius: 50%;
+        border: 1px solid var(--line); display: flex; align-items: center; justify-content: center;
+        position: relative; transition: border-color 0.2s, background 0.2s;
     }
- 
-    /* CASEWORK — editorial list */
-    .case-list { display: flex; flex-direction: column; }
- 
-    .case-row {
-        display: grid;
-        grid-template-columns: 50px 1fr;
-        gap: 1.6rem;
-        padding: 1.8rem 0;
-        border-top: 1px solid var(--line);
+    .case-toggle::before, .case-toggle::after {
+        content: ''; position: absolute; background: var(--ink-dim); transition: transform 0.3s var(--ease), background 0.2s;
     }
+    .case-toggle::before { width: 10px; height: 1.5px; }
+    .case-toggle::after { width: 1.5px; height: 10px; }
+    .case-card.open .case-toggle { background: var(--accent); border-color: var(--accent); }
+    .case-card.open .case-toggle::before, .case-card.open .case-toggle::after { background: #fff; }
+    .case-card.open .case-toggle::after { transform: scaleY(0); }
  
-    .case-row:last-child { border-bottom: 1px solid var(--line); }
+    .case-body { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease); padding: 0 1.6rem; }
+    .case-card.open .case-body { padding: 0 1.6rem 1.6rem; }
  
-    .case-num { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); padding-top: 0.3rem; }
- 
-    .case-title {
-        font-family: var(--serif);
-        font-size: 1.25rem;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: baseline;
-        gap: 0.8rem;
-        flex-wrap: wrap;
+    .case-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 0.4rem; }
+    .case-cols > div {
+        opacity: 0; transform: translateY(6px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
     }
+    .case-card.open .case-cols > div { opacity: 1; transform: translateY(0); }
+    .case-card.open .case-cols > div:nth-child(1) { transition-delay: 0.08s; }
+    .case-card.open .case-cols > div:nth-child(2) { transition-delay: 0.15s; }
+    .case-card.open .case-cols > div:nth-child(3) { transition-delay: 0.22s; }
  
-    .case-title a { text-decoration: none; transition: color 0.2s; }
-    .case-title a:hover { color: var(--accent); }
+    .case-col h5 { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brass); margin-bottom: 0.5rem; }
+    .case-col p { font-size: 0.87rem; color: var(--ink-dim); line-height: 1.65; }
  
-    .case-tags { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); letter-spacing: 0.02em; }
+    @media (max-width: 700px) { .case-cols { grid-template-columns: 1fr; } }
  
-    .case-desc { font-size: 0.92rem; color: var(--ink-dim); line-height: 1.7; max-width: 640px; margin-top: 0.6rem; }
- 
-    /* CREDENTIALS — plain table */
-    table.cred-table { width: 100%; border-collapse: collapse; }
-    .cred-table tr { border-top: 1px solid var(--line); }
-    .cred-table tr:last-child { border-bottom: 1px solid var(--line); }
-    .cred-table td { padding: 1.1rem 0.5rem; font-size: 0.92rem; vertical-align: baseline; }
-    .cred-table td:first-child { padding-left: 0; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); width: 90px; }
-    .cred-table td.name { font-family: var(--serif); font-size: 1rem; color: var(--ink); }
-    .cred-table td.iss { color: var(--ink-dim); text-align: right; padding-right: 0; }
- 
-    @media (max-width: 600px) {
-        .cred-table td.iss { display: none; }
+    /* ATTACK CHAIN STEPPER */
+    .stepper { margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+    .stepper h5 { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brass); margin-bottom: 1rem; }
+    .steps-row { display: flex; gap: 0.4rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
+    .step-btn {
+        font-family: var(--mono); font-size: 0.72rem; padding: 0.5rem 0.9rem; border-radius: 6px;
+        border: 1px solid var(--line); background: var(--bg); cursor: pointer; color: var(--ink-dim);
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
+    .step-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .step-panel { background: var(--accent-tint); border-radius: 8px; padding: 1.1rem 1.3rem; font-size: 0.88rem; color: var(--ink); line-height: 1.7; }
+ 
+    .case-link {
+        display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1rem;
+        font-size: 0.83rem; font-weight: 500; color: var(--accent); text-decoration: none;
+    }
+    .case-link .arrow { transition: transform 0.2s var(--ease); }
+    .case-link:hover .arrow { transform: translateX(3px); }
+ 
+    /* CREDENTIALS */
+    .cred-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .cred-card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.3rem 1.5rem;
+        opacity: 0; transform: translateY(12px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), border-color 0.2s;
+    }
+    .cred-card.vis { opacity: 1; transform: translateY(0); }
+    .cred-card:hover { border-color: var(--accent); }
+    .cred-year { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); margin-bottom: 0.4rem; }
+    .cred-name { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .cred-iss { font-size: 0.85rem; color: var(--ink-dim); }
+    @media (max-width: 640px) { .cred-grid { grid-template-columns: 1fr; } }
  
     /* CONTACT */
-    .contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .contact-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.8rem; }
+    .contact-line { display: flex; justify-content: space-between; padding: 0.8rem 0; border-top: 1px solid var(--line); font-size: 0.9rem; }
+    .contact-line:first-child { border-top: none; }
+    .contact-k { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-line a { text-decoration: none; transition: color 0.2s; }
+    .contact-line a:hover { color: var(--accent); }
  
-    .contact-list .ct-line { display: flex; justify-content: space-between; padding: 0.9rem 0; border-top: 1px solid var(--line); font-size: 0.92rem; }
-    .contact-list .ct-line:last-child { border-bottom: 1px solid var(--line); }
-    .contact-list .ct-k { color: var(--ink-faint); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .contact-list a { text-decoration: none; }
-    .contact-list a:hover { color: var(--accent); }
- 
-    #contact-form label { display: block; font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; margin-top: 1.1rem; }
+    #contact-form label { display: block; font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin: 1rem 0 0.4rem; }
     #contact-form input, #contact-form textarea {
-        width: 100%;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid var(--line);
-        color: var(--ink);
-        font-family: var(--sans);
-        font-size: 0.95rem;
-        padding: 0.5rem 0;
-        outline: none;
+        width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 0.6rem 0.7rem;
+        font-family: var(--sans); font-size: 0.9rem; color: var(--ink); background: var(--bg); outline: none;
+        transition: border-color 0.2s;
     }
     #contact-form input:focus, #contact-form textarea:focus { border-color: var(--accent); }
-    #contact-form textarea { resize: vertical; }
- 
     .submit-btn {
-        margin-top: 1.6rem;
-        background: none;
-        border: 1px solid var(--ink-faint);
-        color: var(--ink);
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        padding: 0.7rem 1.5rem;
-        cursor: pointer;
-        transition: border-color 0.2s, color 0.2s;
+        position: relative; overflow: hidden; margin-top: 1.2rem; background: var(--accent); color: #fff;
+        border: none; border-radius: 6px; padding: 0.65rem 1.4rem; font-size: 0.85rem; font-weight: 500; cursor: pointer;
     }
-    .submit-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .submit-btn span { position: relative; z-index: 1; }
+    .submit-btn::before { content: ''; position: absolute; inset: 0; background: #1e454f; transform: translateY(101%); transition: transform 0.3s var(--ease); }
+    .submit-btn:hover::before { transform: translateY(0); }
+    #contact-output { margin-top: 1rem; font-size: 0.85rem; color: var(--ink-dim); display: none; opacity: 0; transition: opacity 0.4s var(--ease); }
+    #contact-output.vis { opacity: 1; }
  
-    #contact-output { margin-top: 1.5rem; display: none; font-size: 0.88rem; color: var(--ink-dim); }
-    #contact-output .ct-out-line { padding: 0.4rem 0; border-top: 1px solid var(--line); }
+    @media (max-width: 780px) { .contact-grid { grid-template-columns: 1fr; } }
  
-    @media (max-width: 780px) { .contact-row { grid-template-columns: 1fr; } }
- 
-    footer {
-        border-top: 1px solid var(--line);
-        padding: 2.2rem 3rem;
-        text-align: center;
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        color: var(--ink-faint);
-        letter-spacing: 0.06em;
-    }
- 
-    .fi { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fi.vis { opacity: 1; transform: translateY(0); }
+    footer { border-top: 1px solid var(--line); padding: 2rem 3rem; text-align: center; font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); }
  
     @media (prefers-reduced-motion: reduce) {
-        .fi { transition: none; opacity: 1; transform: none; }
+        * { animation: none !important; transition: none !important; }
+        .word-inner, .reveal, .case-card, .cred-card { opacity: 1 !important; transform: none !important; }
     }
 </style>
 </head>
 <body>
  
+<div id="progress"></div>
+ 
 <nav>
-    <div class="nlogo">Your Name</div>
-    <ul>
-        <li><a href="#capabilities">Capabilities</a></li>
-        <li><a href="#casework">Casework</a></li>
-        <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nstatus">Available — Q3 2026</div>
+    <div class="brand">Your Name</div>
+    <div class="nav-links-wrap">
+        <ul id="nav-links">
+            <div id="nav-pill"></div>
+            <li><a href="#capabilities" data-sec="capabilities">Capabilities</a></li>
+            <li><a href="#casework" data-sec="casework">Case Studies</a></li>
+            <li><a href="#credentials" data-sec="credentials">Credentials</a></li>
+            <li><a href="#contact" data-sec="contact">Contact</a></li>
+        </ul>
+    </div>
+    <a href="#contact" class="cta-btn"><span>Get in touch</span></a>
 </nav>
  
 <div class="shell">
  
     <!-- HERO -->
     <section id="hero">
-        <div class="hero-row">
+        <div class="hero-grid">
+            <div class="avatar">YN</div>
             <div>
-                <p class="h-kicker">SECURITY RESEARCH · FIELD NOTES · 2026</p>
-                <h1 class="h-name">Your Name</h1>
-                <p class="h-role">Cybersecurity analyst, working the blue side.</p>
-                <p class="h-lede fi">
-                    Replace this with your own account of how you got into security and what you focus on now —
-                    <strong>detection engineering</strong>, incident response, cloud hardening, or wherever your
-                    real interest sits. Two honest sentences beat five generic ones.
-                </p>
-                <div class="h-facts fi">
-                    <div class="fact"><span class="fv">0</span><span class="fl">Projects</span></div>
-                    <div class="fact"><span class="fv">0</span><span class="fl">Certifications</span></div>
-                    <div class="fact"><span class="fv">0</span><span class="fl">CTFs</span></div>
-                    <div class="fact"><span class="fv">0</span><span class="fl">Lab Hours</span></div>
-                </div>
-                <div class="links-row fi">
-                    <a href="#casework" class="tlink">View casework →</a>
-                    <a href="#contact" class="tlink">Get in touch →</a>
-                    <a href="resume.pdf" class="tlink">Résumé →</a>
-                </div>
+                <p class="h-kicker">Security Analyst · Blue Team</p>
+                <h1 class="h-name" id="hero-name"></h1>
+                <p class="h-role">Cybersecurity student — defensive security &amp; detection engineering</p>
             </div>
-            <div class="hero-visual" id="sphere-mount"></div>
+        </div>
+        <p class="h-lede">
+            Replace this with your own summary — who you are, what you focus on (detection engineering,
+            incident response, cloud security…), and what kind of role you're pursuing. Keep it to
+            <strong>two or three sentences</strong>; hiring managers skim.
+        </p>
+        <div class="btn-row">
+            <a href="#casework" class="cta-btn"><span>View case studies</span></a>
+            <a href="resume.pdf" class="btn-outline">Download résumé</a>
+            <a href="#contact" class="btn-outline">Contact</a>
         </div>
     </section>
+ 
+    <div class="marquee-wrap">
+        <div class="marquee-track" id="marquee"></div>
+    </div>
  
     <!-- CAPABILITIES -->
     <section id="capabilities" class="sec">
-        <div class="chapter"><span class="num">01</span><span class="label">Capabilities</span></div>
-        <div class="cap-list">
-            <div class="cap-row fi">
-                <p class="cap-name">Penetration Testing</p>
-                <p class="cap-desc">Replace with your own description — scope, standout engagements, methodology you follow.</p>
-                <p class="cap-level">Advanced</p>
-            </div>
-            <div class="cap-row fi">
-                <p class="cap-name">Web App Security</p>
-                <p class="cap-desc">OWASP Top 10, authentication bypass, business logic flaws.</p>
-                <p class="cap-level">Advanced</p>
-            </div>
-            <div class="cap-row fi">
-                <p class="cap-name">Network Security</p>
-                <p class="cap-desc">Traffic analysis, protocol abuse, Active Directory attack chains.</p>
-                <p class="cap-level">Proficient</p>
-            </div>
-            <div class="cap-row fi">
-                <p class="cap-name">Malware Analysis</p>
-                <p class="cap-desc">Static and dynamic analysis, reverse engineering, detection rule writing.</p>
-                <p class="cap-level">Proficient</p>
-            </div>
-            <div class="cap-row fi">
-                <p class="cap-name">Cloud Security</p>
-                <p class="cap-desc">IAM misconfiguration, container escape, serverless attack surface.</p>
-                <p class="cap-level">Working knowledge</p>
+        <p class="sec-eyebrow reveal">01 — Capabilities</p>
+        <h2 class="sec-title reveal">Where I focus</h2>
+        <div class="toggle-row reveal">
+            <span style="font-size:0.85rem;color:var(--ink-dim)">View:</span>
+            <div class="segmented" id="cap-toggle">
+                <div class="seg-pill"></div>
+                <button class="seg-btn active" data-view="defense">Defensive</button>
+                <button class="seg-btn" data-view="offense">Offensive</button>
             </div>
         </div>
+        <div class="cap-bars reveal" id="cap-bars"></div>
     </section>
  
-    <!-- CASEWORK -->
+    <!-- CASE STUDIES -->
     <section id="casework" class="sec">
-        <div class="chapter"><span class="num">02</span><span class="label">Casework</span></div>
-        <div class="case-list">
-            <div class="case-row fi">
-                <p class="case-num">01</p>
-                <div>
-                    <p class="case-title"><a href="#" target="_blank">Your Flagship Project</a></p>
-                    <p class="case-tags">Python · Flask · Blue Team</p>
-                    <p class="case-desc">Replace with a real description of what it does, why you built it, and what problem it solves.</p>
-                </div>
-            </div>
-            <div class="case-row fi">
-                <p class="case-num">02</p>
-                <div>
-                    <p class="case-title"><a href="#" target="_blank">Project Two</a></p>
-                    <p class="case-tags">Bash · Linux · Threat Hunting</p>
-                    <p class="case-desc">Short honest description of the project and its outcome.</p>
-                </div>
-            </div>
-            <div class="case-row fi">
-                <p class="case-num">03</p>
-                <div>
-                    <p class="case-title"><a href="#" target="_blank">Project Three</a></p>
-                    <p class="case-tags">Python · Windows · Endpoint Security</p>
-                    <p class="case-desc">Short honest description of the project and its outcome.</p>
-                </div>
-            </div>
-            <div class="case-row fi">
-                <p class="case-num">04</p>
-                <div>
-                    <p class="case-title"><a href="#" target="_blank">Project Four</a></p>
-                    <p class="case-tags">Node.js · API Security</p>
-                    <p class="case-desc">Short honest description of the project and its outcome.</p>
-                </div>
-            </div>
-        </div>
+        <p class="sec-eyebrow reveal">02 — Case Studies</p>
+        <h2 class="sec-title reveal">Selected work</h2>
+        <div class="filter-row reveal" id="filter-row"></div>
+        <div id="case-list"></div>
     </section>
  
     <!-- CREDENTIALS -->
     <section id="credentials" class="sec">
-        <div class="chapter"><span class="num">03</span><span class="label">Credentials</span></div>
-        <table class="cred-table fi">
-            <tr><td>2024</td><td class="name">Certification Name</td><td class="iss">Issuing Body</td></tr>
-            <tr><td>2024</td><td class="name">Certification Name</td><td class="iss">Issuing Body</td></tr>
-            <tr><td>2023</td><td class="name">Certification Name</td><td class="iss">Issuing Body</td></tr>
-            <tr><td>2023</td><td class="name">Certification Name</td><td class="iss">Issuing Body</td></tr>
-            <tr><td>2022</td><td class="name">Certification Name</td><td class="iss">Issuing Body</td></tr>
-        </table>
+        <p class="sec-eyebrow reveal">03 — Credentials</p>
+        <h2 class="sec-title reveal">Certifications</h2>
+        <div class="cred-grid" id="cred-grid"></div>
     </section>
  
     <!-- CONTACT -->
     <section id="contact" class="sec">
-        <div class="chapter"><span class="num">04</span><span class="label">Contact</span></div>
-        <div class="contact-row">
-            <div class="contact-list fi">
-                <div class="ct-line"><span class="ct-k">Email</span><a href="mailto:you@example.com">you@example.com</a></div>
-                <div class="ct-line"><span class="ct-k">GitHub</span><a href="#" target="_blank">github.com/yourhandle</a></div>
-                <div class="ct-line"><span class="ct-k">LinkedIn</span><a href="#" target="_blank">linkedin.com/in/yourhandle</a></div>
-                <div class="ct-line"><span class="ct-k">Twitter</span><a href="#" target="_blank">@yourhandle</a></div>
-            </div>
-            <div class="fi">
+        <p class="sec-eyebrow reveal">04 — Contact</p>
+        <h2 class="sec-title reveal">Let's talk</h2>
+        <div class="contact-grid">
+            <div class="contact-card reveal" id="contact-info"></div>
+            <div class="contact-card reveal">
                 <form id="contact-form">
-                    <label>Name</label>
-                    <input id="cname" type="text" required placeholder="Your name" />
-                    <label>Email</label>
-                    <input id="cemail" type="email" required placeholder="you@example.com" />
-                    <label>Message</label>
-                    <textarea id="cmsg" rows="3" required placeholder="Write your message"></textarea>
-                    <button type="submit" class="submit-btn">Submit</button>
+                    <label>Name</label><input id="cname" type="text" required placeholder="Your name" />
+                    <label>Email</label><input id="cemail" type="email" required placeholder="you@example.com" />
+                    <label>Message</label><textarea id="cmsg" rows="3" required placeholder="Write your message"></textarea>
+                    <button type="submit" class="submit-btn"><span>Send message</span></button>
                 </form>
                 <div id="contact-output"></div>
             </div>
@@ -460,80 +385,269 @@
  
 </div>
  
-<footer>YOUR NAME · SECURITY RESEARCH · <span id="yr"></span></footer>
+<footer>YOUR NAME · SECURITY ANALYST · <span id="yr"></span></footer>
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-    // ── THREE.JS: single wireframe geodesic, bounded to hero visual only ──
-    const mount = document.getElementById('sphere-mount');
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
+// ── DATA — replace with your real content ──
+const DATA = {
+    stack: ["Python", "Bash", "Nmap", "Wireshark", "Metasploit", "Burp Suite", "Ghidra", "AWS", "Linux", "SIEM"],
+    capabilities: {
+        defense: [
+            { name: "Threat Detection", pct: 90 },
+            { name: "Incident Response", pct: 85 },
+            { name: "Network Monitoring", pct: 88 },
+            { name: "Malware Analysis", pct: 75 },
+            { name: "Cloud Hardening", pct: 70 },
+        ],
+        offense: [
+            { name: "Penetration Testing", pct: 90 },
+            { name: "Web App Security", pct: 88 },
+            { name: "Active Directory Attacks", pct: 80 },
+            { name: "Exploit Development", pct: 65 },
+            { name: "Social Engineering", pct: 60 },
+        ],
+    },
+    caseStudies: [
+        {
+            id: "cs1", title: "Your Flagship Project", tags: ["Blue Team", "Python"],
+            challenge: "Replace with the real problem this project addressed.",
+            approach: "Replace with how you approached it — tools, method, decisions made.",
+            outcome: "Replace with the measurable or observed result.",
+            link: "#",
+            chain: [
+                { stage: "Recon", detail: "Replace: what was discovered during initial reconnaissance." },
+                { stage: "Foothold", detail: "Replace: how initial access or the starting condition was established." },
+                { stage: "Escalation", detail: "Replace: what was escalated or expanded from that foothold." },
+                { stage: "Detection", detail: "Replace: how the activity was detected or surfaced." },
+                { stage: "Remediation", detail: "Replace: what fix, control, or report resulted from this." },
+            ],
+        },
+        { id: "cs2", title: "Project Two", tags: ["Blue Team", "Bash"], challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
+        { id: "cs3", title: "Project Three", tags: ["Endpoint Security", "Python"], challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
+        { id: "cs4", title: "Project Four", tags: ["API Security", "Node.js"], challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
+    ],
+    certs: [
+        { year: "2024", name: "Certification Name", issuer: "Issuing Body" },
+        { year: "2024", name: "Certification Name", issuer: "Issuing Body" },
+        { year: "2023", name: "Certification Name", issuer: "Issuing Body" },
+        { year: "2022", name: "Certification Name", issuer: "Issuing Body" },
+    ],
+    contact: { email: "you@example.com", github: "github.com/yourhandle", linkedin: "linkedin.com/in/yourhandle", twitter: "@yourhandle", location: "Your City, Country" },
+};
  
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 0, 6.5);
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
  
-    const geo = new THREE.IcosahedronGeometry(2, 2);
-    const edges = new THREE.EdgesGeometry(geo);
-    const mat = new THREE.LineBasicMaterial({ color: 0xede9e3, transparent: true, opacity: 0.32 });
-    const wire = new THREE.LineSegments(edges, mat);
-    scene.add(wire);
+// ── HERO TEXT REVEAL ──
+(function () {
+    const el = document.getElementById('hero-name');
+    const words = "Your Name".split(' ');
+    el.innerHTML = words.map((w, i) =>
+        `<span class="word-mask"><span class="word-inner" style="animation-delay:${0.15 + i * 0.08}s">${esc(w)}&nbsp;</span></span>`
+    ).join('');
+})();
  
-    const ringGeo = new THREE.RingGeometry(2.55, 2.58, 80);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0xc9743b, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI / 2.4;
-    scene.add(ring);
- 
-    function resize() {
-        const size = mount.clientWidth;
-        renderer.setSize(size, size);
-        camera.aspect = 1;
-        camera.updateProjectionMatrix();
+// ── COUNT-UP UTILITY ──
+function animateCount(el, target, suffix = '', duration = 900) {
+    const start = performance.now();
+    function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
     }
-    resize();
-    window.addEventListener('resize', resize);
-    new ResizeObserver(resize).observe(mount);
+    requestAnimationFrame(step);
+}
  
-    const clock = new THREE.Clock();
-    function animate() {
-        requestAnimationFrame(animate);
-        const dt = clock.getDelta();
-        wire.rotation.y += dt * 0.12;
-        wire.rotation.x += dt * 0.045;
-        ring.rotation.z += dt * 0.05;
-        renderer.render(scene, camera);
+// ── MARQUEE ──
+(function () {
+    const track = document.getElementById('marquee');
+    const items = [...DATA.stack, ...DATA.stack].map(s => `<span>${esc(s)}</span>`).join('');
+    track.innerHTML = items;
+})();
+ 
+// ── CAPABILITIES ──
+function renderCaps(view) {
+    const wrap = document.getElementById('cap-bars');
+    wrap.innerHTML = '';
+    DATA.capabilities[view].forEach(c => {
+        const row = document.createElement('div');
+        row.className = 'cap-bar-row';
+        row.innerHTML = `
+            <div class="cap-bar-name">${esc(c.name)}</div>
+            <div class="cap-bar-track"><div class="cap-bar-fill" data-w="${c.pct}"></div></div>
+            <div class="cap-bar-pct" data-pct="${c.pct}">0%</div>`;
+        wrap.appendChild(row);
+    });
+    requestAnimationFrame(() => {
+        wrap.querySelectorAll('.cap-bar-fill').forEach(f => { f.style.width = f.dataset.w + '%'; });
+        wrap.querySelectorAll('.cap-bar-pct').forEach(p => animateCount(p, +p.dataset.pct, '%'));
+    });
+}
+renderCaps('defense');
+ 
+const segPill = document.querySelector('.seg-pill');
+document.querySelectorAll('#cap-toggle .seg-btn').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#cap-toggle .seg-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        segPill.classList.toggle('right', i === 1);
+        renderCaps(btn.dataset.view);
+    });
+});
+ 
+// ── CASE STUDIES + FILTERS ──
+const allTags = [...new Set(DATA.caseStudies.flatMap(c => c.tags))];
+const filterRow = document.getElementById('filter-row');
+const activeFilters = new Set();
+ 
+allTags.forEach(tag => {
+    const chip = document.createElement('button');
+    chip.className = 'filter-chip';
+    chip.textContent = tag;
+    chip.addEventListener('click', () => {
+        if (activeFilters.has(tag)) { activeFilters.delete(tag); chip.classList.remove('on'); }
+        else { activeFilters.add(tag); chip.classList.add('on'); }
+        applyFilters();
+    });
+    filterRow.appendChild(chip);
+});
+ 
+function applyFilters() {
+    document.querySelectorAll('.case-card').forEach(card => {
+        const tags = card.dataset.tags.split(',');
+        const match = activeFilters.size === 0 || tags.some(t => activeFilters.has(t));
+        card.classList.toggle('hidden', !match);
+    });
+}
+ 
+const caseList = document.getElementById('case-list');
+DATA.caseStudies.forEach((cs, idx) => {
+    const card = document.createElement('div');
+    card.className = 'case-card';
+    card.dataset.tags = cs.tags.join(',');
+    card.style.transitionDelay = (idx * 0.08) + 's';
+ 
+    let chainHtml = '';
+    if (cs.chain) {
+        chainHtml = `
+        <div class="stepper">
+            <h5>Attack chain walkthrough</h5>
+            <div class="steps-row">${cs.chain.map((s, i) => `<button class="step-btn${i===0?' active':''}" data-i="${i}">${esc(s.stage)}</button>`).join('')}</div>
+            <div class="step-panel" data-panel>${esc(cs.chain[0].detail)}</div>
+        </div>`;
     }
-    animate();
  
-    // ── SCROLL FADE-IN ──
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+    card.innerHTML = `
+        <div class="case-head" data-toggle>
+            <div>
+                <div class="case-title">${esc(cs.title)}</div>
+                <div class="case-tags">${cs.tags.join(' · ')}</div>
+            </div>
+            <div class="case-toggle"></div>
+        </div>
+        <div class="case-body">
+            <div class="case-cols">
+                <div class="case-col"><h5>Challenge</h5><p>${esc(cs.challenge)}</p></div>
+                <div class="case-col"><h5>Approach</h5><p>${esc(cs.approach)}</p></div>
+                <div class="case-col"><h5>Outcome</h5><p>${esc(cs.outcome)}</p></div>
+            </div>
+            ${chainHtml}
+            <a href="${cs.link}" class="case-link" target="_blank">View repository <span class="arrow">→</span></a>
+        </div>`;
  
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    const head = card.querySelector('[data-toggle]');
+    const body = card.querySelector('.case-body');
+    head.addEventListener('click', () => {
+        const isOpen = card.classList.toggle('open');
+        body.style.maxHeight = isOpen ? body.scrollHeight + 400 + 'px' : '0px';
+    });
  
-    // ── CONTACT FORM ──
-    (function () {
-        const form = document.getElementById('contact-form');
-        const out = document.getElementById('contact-output');
-        function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
-        if (!form || !out) return;
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            const name = document.getElementById('cname').value.trim();
-            const email = document.getElementById('cemail').value.trim();
-            const msg = document.getElementById('cmsg').value.trim();
-            out.innerHTML = `<div class="ct-out-line">Name — ${esc(name)}</div>
-                <div class="ct-out-line">Email — ${esc(email)}</div>
-                <div class="ct-out-line">Message — ${esc(msg).replace(/\n/g,'<br/>')}</div>`;
-            out.style.display = 'block';
-            form.reset();
+    if (cs.chain) {
+        const stepBtns = card.querySelectorAll('.step-btn');
+        const panel = card.querySelector('[data-panel]');
+        stepBtns.forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                stepBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                panel.textContent = cs.chain[+btn.dataset.i].detail;
+                if (card.classList.contains('open')) body.style.maxHeight = body.scrollHeight + 400 + 'px';
+            });
         });
-    })();
+    }
+ 
+    caseList.appendChild(card);
+});
+ 
+// ── CREDENTIALS ──
+const credGrid = document.getElementById('cred-grid');
+DATA.certs.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'cred-card';
+    card.style.transitionDelay = (i * 0.07) + 's';
+    card.innerHTML = `<div class="cred-year">${esc(c.year)}</div><div class="cred-name">${esc(c.name)}</div><div class="cred-iss">${esc(c.issuer)}</div>`;
+    credGrid.appendChild(card);
+});
+ 
+// ── CONTACT INFO ──
+document.getElementById('contact-info').innerHTML = `
+    <div class="contact-line"><span class="contact-k">Email</span><a href="mailto:${DATA.contact.email}">${DATA.contact.email}</a></div>
+    <div class="contact-line"><span class="contact-k">GitHub</span><a href="#" target="_blank">${DATA.contact.github}</a></div>
+    <div class="contact-line"><span class="contact-k">LinkedIn</span><a href="#" target="_blank">${DATA.contact.linkedin}</a></div>
+    <div class="contact-line"><span class="contact-k">Twitter</span><a href="#" target="_blank">${DATA.contact.twitter}</a></div>
+    <div class="contact-line"><span class="contact-k">Location</span><span>${esc(DATA.contact.location)}</span></div>
+`;
+ 
+// ── CONTACT FORM ──
+(function () {
+    const form = document.getElementById('contact-form');
+    const out = document.getElementById('contact-output');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('cname').value.trim();
+        const msg = document.getElementById('cmsg').value.trim();
+        out.innerHTML = `Thanks, ${esc(name)} — this is a placeholder confirmation. Wire this form up to your email service or a mailto link.<br><br><em>${esc(msg)}</em>`;
+        out.style.display = 'block';
+        requestAnimationFrame(() => out.classList.add('vis'));
+        form.reset();
+    });
+})();
+ 
+document.getElementById('yr').textContent = new Date().getFullYear();
+ 
+// ── SCROLL SPY + SLIDING NAV PILL + PROGRESS BAR ──
+const sections = ['capabilities', 'casework', 'credentials', 'contact'].map(id => document.getElementById(id));
+const navLinks = document.querySelectorAll('#nav-links a');
+const navPill = document.getElementById('nav-pill');
+ 
+function movePill(link) {
+    if (!link) return;
+    navPill.style.left = link.offsetLeft + 'px';
+    navPill.style.width = link.offsetWidth + 'px';
+}
+ 
+const spyObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            navLinks.forEach(l => l.classList.toggle('on', l.dataset.sec === e.target.id));
+            movePill(document.querySelector('#nav-links a.on'));
+        }
+    });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => spyObs.observe(s));
+ 
+window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+});
+window.addEventListener('resize', () => movePill(document.querySelector('#nav-links a.on')));
+ 
+// ── REVEAL ON SCROLL (staggered, not uniform) ──
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .case-card, .cred-card').forEach(el => revealObs.observe(el));
 </script>
 </body>
 </html>
