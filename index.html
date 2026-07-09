@@ -5,330 +5,309 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>[Your Name] — Security Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
  
     :root {
-        --bg: #ffffff;
-        --panel: #f3f1ec;
-        --ink: #111111;
-        --ink-dim: #55534d;
-        --line: #111111;
-        --red: #e0301e;
-        --display: 'Archivo Black', sans-serif;
-        --head: 'Space Grotesk', sans-serif;
+        --bg: #f4f5f7;
+        --panel: #ffffff;
+        --sidebar: #fbfbfc;
+        --ink: #1b1d22;
+        --ink-dim: #6b6f76;
+        --ink-faint: #a3a7ae;
+        --line: #e5e6ea;
+        --accent: #2f6fed;
+        --accent-tint: #eaf1fe;
         --mono: 'IBM Plex Mono', monospace;
+        --sans: 'Inter', sans-serif;
+        --shadow: 0 6px 24px rgba(20, 24, 33, 0.06);
     }
  
-    html { scroll-behavior: smooth; }
+    html, body { height: 100%; overflow: hidden; }
  
     body {
         background: var(--bg);
         color: var(--ink);
-        font-family: var(--head);
-        overflow: hidden;
+        font-family: var(--sans);
+        font-size: 15px;
     }
  
-    /* DECK */
-    .deck {
+    a { color: inherit; }
+ 
+    .app {
         height: 100vh;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
+        display: grid;
+        grid-template-columns: 260px 1fr;
     }
  
-    .slide {
-        height: 100vh;
-        scroll-snap-align: start;
-        position: relative;
+    /* SIDEBAR */
+    .sidebar {
+        background: var(--sidebar);
+        border-right: 1px solid var(--line);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 0 5vw;
-        border-bottom: 1px solid var(--line);
-        overflow: hidden;
+        padding: 1.6rem 1.1rem;
     }
  
-    .watermark {
-        position: absolute;
-        font-family: var(--display);
-        font-size: 42vw;
-        line-height: 1;
-        color: var(--panel);
-        top: 50%;
-        left: 5vw;
-        transform: translateY(-50%);
-        z-index: 0;
-        user-select: none;
-        pointer-events: none;
+    .profile { display: flex; align-items: center; gap: 0.8rem; padding: 0.4rem 0.6rem 1.6rem; border-bottom: 1px solid var(--line); margin-bottom: 1.2rem; }
+    .avatar {
+        width: 40px; height: 40px; border-radius: 10px;
+        background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center;
+        font-weight: 600; font-size: 0.9rem; flex-shrink: 0;
     }
+    .profile-name { font-weight: 600; font-size: 0.92rem; }
+    .profile-role { font-size: 0.72rem; color: var(--ink-dim); }
+    .profile-status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.68rem; color: var(--ink-faint); margin-top: 0.2rem; }
+    .profile-status .dot { width: 5px; height: 5px; border-radius: 50%; background: #2fb872; }
  
-    .slide-inner { position: relative; z-index: 1; max-width: 980px; }
- 
-    .idx-tag {
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
-        gap: 0.7rem;
-        margin-bottom: 1.6rem;
-    }
-    .idx-tag .n { color: var(--red); font-weight: 500; }
-    .idx-tag::after { content: ''; flex: 1; height: 1px; background: var(--line); max-width: 120px; }
- 
-    /* SIDE NAV DOTS */
-    .deck-nav {
-        position: fixed;
-        right: 2.2rem;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 50;
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-        align-items: center;
-    }
-    .deck-nav button {
-        width: 9px; height: 9px;
-        border: 1px solid var(--ink);
-        background: transparent;
-        border-radius: 0;
-        cursor: pointer;
-        padding: 0;
-        transition: background 0.2s, transform 0.2s;
-    }
-    .deck-nav button.on { background: var(--red); border-color: var(--red); transform: scale(1.3); }
- 
-    .deck-progress {
-        position: fixed;
-        left: 0; top: 0;
-        width: 3px; height: 100vh;
-        background: var(--panel);
-        z-index: 49;
-    }
-    .deck-progress-fill { width: 100%; background: var(--red); height: 0%; transition: height 0.15s linear; }
- 
-    /* COVER SLIDE */
-    #s-cover .brand-mark {
-        font-family: var(--mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 2rem;
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-    }
-    #s-cover .brand-mark .dot { width: 8px; height: 8px; background: var(--red); }
- 
-    .cover-name {
-        font-family: var(--display);
-        font-size: clamp(3rem, 9vw, 7.5rem);
-        line-height: 0.92;
-        text-transform: uppercase;
-        margin-bottom: 1.2rem;
-    }
- 
-    .cover-role { font-size: 1.15rem; color: var(--ink-dim); max-width: 480px; margin-bottom: 2.4rem; }
-    .cover-role strong { color: var(--ink); }
- 
-    .cover-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-    .btn {
-        font-family: var(--mono); font-size: 0.8rem; text-decoration: none;
-        border: 1px solid var(--ink); padding: 0.8rem 1.5rem; color: var(--ink);
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+    .nav-item {
+        display: flex; align-items: center; gap: 0.75rem;
+        padding: 0.62rem 0.7rem; border-radius: 8px; cursor: pointer;
+        color: var(--ink-dim); font-size: 0.87rem; font-weight: 500;
         transition: background 0.15s, color 0.15s;
     }
-    .btn:hover { background: var(--ink); color: #fff; }
-    .btn.solid { background: var(--red); border-color: var(--red); color: #fff; }
-    .btn.solid:hover { background: var(--ink); border-color: var(--ink); }
+    .nav-item svg { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.75; }
+    .nav-item:hover { background: var(--line); color: var(--ink); }
+    .nav-item.on { background: var(--accent-tint); color: var(--accent); }
+    .nav-item.on svg { opacity: 1; }
+    .nav-item .kbd { margin-left: auto; font-family: var(--mono); font-size: 0.62rem; color: var(--ink-faint); }
  
-    .scroll-hint {
-        position: absolute; bottom: 2.4rem; left: 5vw;
-        font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--ink-dim);
-        display: flex; align-items: center; gap: 0.5rem;
+    .sidebar-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.7rem; color: var(--ink-faint); display: flex; justify-content: space-between; align-items: center; }
+    .sidebar-footer a { color: var(--accent); text-decoration: none; }
+ 
+    /* MAIN */
+    .main { position: relative; overflow: hidden; padding: 2.4rem 3rem; display: flex; flex-direction: column; }
+ 
+    .panel-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.6rem; flex-shrink: 0; }
+    .panel-title { font-size: 1.5rem; font-weight: 700; }
+    .panel-sub { font-size: 0.82rem; color: var(--ink-dim); }
+ 
+    .panels { position: relative; flex: 1; min-height: 0; }
+    .panel {
+        position: absolute; inset: 0;
+        opacity: 0; transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        overflow-y: auto;
+        padding-right: 0.4rem;
     }
-    .scroll-hint .arr { animation: bob 1.6s ease-in-out infinite; }
-    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+    .panel.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
  
-    /* CAPABILITIES SLIDE */
-    .cap-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .cap-cell { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.6rem 1.8rem; background: var(--bg); }
-    .cap-num { font-family: var(--display); font-size: 2.6rem; color: var(--red); line-height: 1; }
-    .cap-name { font-size: 1rem; font-weight: 700; margin: 0.5rem 0 0.4rem; }
-    .cap-desc { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-dim); line-height: 1.6; }
+    /* HOME PANEL */
+    .home-hero { max-width: 620px; }
+    .home-hero h1 { font-size: 2.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .home-hero p { font-size: 0.96rem; color: var(--ink-dim); line-height: 1.75; margin-bottom: 1.6rem; }
+    .home-hero strong { color: var(--ink); }
+    .home-cta-row { display: flex; gap: 0.8rem; }
+    .btn-primary { background: var(--accent); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; padding: 0.65rem 1.3rem; border-radius: 8px; transition: opacity 0.15s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary { border: 1px solid var(--line); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.65rem 1.3rem; border-radius: 8px; color: var(--ink); transition: border-color 0.15s, color 0.15s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
  
-    @media (max-width: 760px) { .cap-grid { grid-template-columns: 1fr; } .watermark { font-size: 70vw; } }
+    .stat-row { display: flex; gap: 1rem; margin-top: 2.2rem; }
+    .stat-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem; box-shadow: var(--shadow); min-width: 100px; }
+    .stat-v { font-size: 1.4rem; font-weight: 700; }
+    .stat-l { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.2rem; }
  
-    /* CASEWORK SLIDE */
-    .case-grid { border-top: 1px solid var(--line); }
-    .case-row {
-        display: grid; grid-template-columns: 60px 1fr auto; align-items: center;
-        gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--line);
-        cursor: pointer;
+    /* CAPABILITIES PANEL */
+    .cap-list { display: flex; flex-direction: column; gap: 0.7rem; max-width: 640px; }
+    .cap-row { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.2rem; box-shadow: var(--shadow); }
+    .cap-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+    .cap-name { font-size: 0.9rem; font-weight: 600; }
+    .cap-pct { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
+    .cap-track { height: 6px; background: var(--line); border-radius: 4px; overflow: hidden; margin-bottom: 0.5rem; }
+    .cap-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.9s ease; }
+    .cap-desc { font-size: 0.8rem; color: var(--ink-dim); }
+ 
+    /* CASEWORK PANEL */
+    .case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem; max-width: 760px; }
+    .case-card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem 1.3rem;
+        box-shadow: var(--shadow); cursor: pointer; transition: border-color 0.15s, transform 0.15s;
     }
-    .case-row .cn { font-family: var(--mono); color: var(--ink-dim); font-size: 0.85rem; }
-    .case-row .ct { font-size: 1.3rem; font-weight: 700; transition: color 0.15s; }
-    .case-row:hover .ct { color: var(--red); }
-    .case-row .ctags { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-dim); margin-top: 0.3rem; }
-    .case-row .cgo { font-family: var(--mono); font-size: 0.75rem; }
+    .case-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .case-card .ct { font-weight: 600; font-size: 0.98rem; margin-bottom: 0.4rem; }
+    .case-card .ctags { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); margin-bottom: 0.6rem; }
+    .case-card .cd { font-size: 0.82rem; color: var(--ink-dim); line-height: 1.55; }
+    @media (max-width: 700px) { .case-grid { grid-template-columns: 1fr; } }
  
-    /* CASE STUDY OVERLAY */
-    .overlay {
-        position: fixed; inset: 0; background: var(--bg); z-index: 300;
-        display: flex; flex-direction: column;
-        transform: translateY(100%); transition: transform 0.4s cubic-bezier(.19,1,.22,1);
+    /* CREDENTIALS PANEL */
+    .cred-list { display: flex; flex-direction: column; gap: 0.6rem; max-width: 640px; }
+    .cred-row { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 0.9rem 1.2rem; box-shadow: var(--shadow); display: flex; align-items: center; gap: 1rem; }
+    .cred-year { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); background: var(--accent-tint); padding: 0.25rem 0.5rem; border-radius: 5px; }
+    .cred-name { font-weight: 600; font-size: 0.9rem; }
+    .cred-iss { font-size: 0.78rem; color: var(--ink-dim); margin-left: auto; }
+ 
+    /* CONTACT PANEL */
+    .contact-wrap { max-width: 480px; }
+    .contact-wrap h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .contact-wrap > p { font-size: 0.88rem; color: var(--ink-dim); margin-bottom: 1.6rem; }
+    .contact-item {
+        display: flex; align-items: center; gap: 0.9rem; padding: 0.85rem 1rem;
+        background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 0.6rem;
+        text-decoration: none; color: var(--ink); box-shadow: var(--shadow); transition: border-color 0.15s;
     }
-    .overlay.open { transform: translateY(0); }
-    .overlay-head { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5vw; border-bottom: 1px solid var(--line); }
-    .overlay-close { font-family: var(--mono); font-size: 0.85rem; background: none; border: 1px solid var(--ink); padding: 0.5rem 1rem; cursor: pointer; }
-    .overlay-close:hover { background: var(--ink); color: #fff; }
-    .overlay-body { flex: 1; overflow-y: auto; padding: 3rem 5vw; max-width: 980px; }
-    .overlay-title { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 3rem); text-transform: uppercase; margin-bottom: 2rem; }
-    .overlay-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2.5rem; }
-    .overlay-cols h5 { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red); margin-bottom: 0.6rem; }
-    .overlay-cols p { font-size: 0.92rem; color: var(--ink-dim); line-height: 1.7; }
-    @media (max-width: 700px) { .overlay-cols { grid-template-columns: 1fr; } }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-item .ic { width: 30px; height: 30px; border-radius: 7px; background: var(--accent-tint); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-item .ic svg { width: 15px; height: 15px; color: var(--accent); }
+    .contact-item .lbl { font-size: 0.68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+    .contact-item .val { font-size: 0.9rem; font-weight: 500; }
  
-    .chain-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
-    .chain-btn {
-        font-family: var(--mono); font-size: 0.72rem; padding: 0.5rem 1rem; border: 1px solid var(--ink);
-        background: none; cursor: pointer; color: var(--ink);
+    /* MODAL SHEET */
+    .modal-backdrop {
+        position: fixed; inset: 0; background: rgba(20,24,33,0.35); backdrop-filter: blur(2px);
+        display: flex; align-items: center; justify-content: center; z-index: 300;
+        opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
     }
-    .chain-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
-    .chain-panel { background: var(--panel); padding: 1.3rem 1.5rem; font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
-    .overlay-link { font-family: var(--mono); font-size: 0.85rem; color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red); }
- 
-    /* CREDENTIALS SLIDE */
-    .cred-grid { border-top: 1px solid var(--line); }
-    .cred-row {
-        display: grid; grid-template-columns: 90px 1fr auto; align-items: baseline;
-        gap: 1.5rem; padding: 1.2rem 0; border-bottom: 1px solid var(--line);
+    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .modal-sheet {
+        background: var(--panel); border-radius: 16px; width: min(640px, 90vw); max-height: 80vh; overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        transform: translateY(16px) scale(0.98); transition: transform 0.25s ease;
+        padding: 2rem 2.2rem;
     }
-    .cred-row .cy { font-family: var(--display); font-size: 1.3rem; color: var(--red); }
-    .cred-row .cnm { font-size: 1.05rem; font-weight: 700; }
-    .cred-row .cis { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-dim); }
+    .modal-backdrop.open .modal-sheet { transform: translateY(0) scale(1); }
+    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.4rem; }
+    .modal-title { font-size: 1.3rem; font-weight: 700; }
+    .modal-tags { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); margin-top: 0.3rem; }
+    .modal-close { background: var(--line); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; color: var(--ink-dim); flex-shrink: 0; }
+    .modal-close:hover { background: var(--accent); color: #fff; }
  
-    /* CONTACT SLIDE */
-    .contact-big { font-family: var(--display); font-size: clamp(1.8rem, 6vw, 4rem); text-transform: uppercase; margin-bottom: 1.5rem; }
-    .contact-email {
-        font-family: var(--head); font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700; text-decoration: none;
-        color: var(--ink); border-bottom: 2px solid var(--red); padding-bottom: 4px; display: inline-block; margin-bottom: 2rem;
-    }
-    .contact-list { display: flex; gap: 2.2rem; flex-wrap: wrap; font-family: var(--mono); font-size: 0.85rem; }
-    .contact-list a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
-    .contact-list a:hover { border-color: var(--ink); }
+    .modal-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 1.4rem; }
+    .modal-cols h5 { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.4rem; }
+    .modal-cols p { font-size: 0.85rem; color: var(--ink-dim); line-height: 1.6; }
+    @media (max-width: 560px) { .modal-cols { grid-template-columns: 1fr; } }
  
-    @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .scroll-hint .arr { animation: none; }
-        .overlay { transition: none; }
+    .chain-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+    .chain-btn { font-family: var(--mono); font-size: 0.7rem; padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; color: var(--ink-dim); }
+    .chain-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chain-panel { background: var(--accent-tint); border-radius: 8px; padding: 1rem 1.1rem; font-size: 0.86rem; line-height: 1.6; margin-bottom: 1rem; }
+    .modal-link { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+ 
+    @media (max-width: 860px) {
+        .app { grid-template-columns: 76px 1fr; }
+        .profile-name, .profile-role, .profile-status, .nav-item span:not(.kbd), .sidebar-footer span { display: none; }
+        .nav-item { justify-content: center; }
+        .profile { justify-content: center; }
     }
 </style>
 </head>
 <body>
  
-<div class="deck-progress"><div class="deck-progress-fill" id="deck-progress-fill"></div></div>
-<nav class="deck-nav" id="deck-nav"></nav>
- 
-<div class="deck" id="deck">
- 
-    <!-- COVER -->
-    <section class="slide" id="s-cover" data-label="Intro">
-        <div class="watermark">01</div>
-        <div class="slide-inner">
-            <p class="brand-mark"><span class="dot"></span>Security Analyst / Blue Team</p>
-            <h1 class="cover-name">Your<br />Name</h1>
-            <p class="cover-role">Replace this with your own summary — what you focus on and what kind of role you're chasing. <strong>Two sentences, no filler.</strong></p>
-            <div class="cover-cta-row">
-                <a href="#s-casework" class="btn solid" data-goto="2">View Casework</a>
-                <a href="resume.pdf" class="btn">Résumé</a>
+<div class="app">
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="avatar">YN</div>
+            <div>
+                <div class="profile-name">Your Name</div>
+                <div class="profile-role">Security Analyst</div>
+                <div class="profile-status"><span class="dot"></span>Available</div>
             </div>
         </div>
-        <p class="scroll-hint">Scroll or press ↓ <span class="arr">↓</span></p>
-    </section>
+        <ul class="nav-list" id="nav-list">
+            <li class="nav-item on" data-panel="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg><span>Home</span><span class="kbd">1</span></li>
+            <li class="nav-item" data-panel="cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg><span>Capabilities</span><span class="kbd">2</span></li>
+            <li class="nav-item" data-panel="case"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg><span>Casework</span><span class="kbd">3</span></li>
+            <li class="nav-item" data-panel="cred"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-2.5L17 21l-1.5-8.5"/></svg><span>Credentials</span><span class="kbd">4</span></li>
+            <li class="nav-item" data-panel="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Contact</span><span class="kbd">5</span></li>
+        </ul>
+        <div class="sidebar-footer"><span id="yr"></span><a href="resume.pdf">Résumé ↗</a></div>
+    </aside>
  
-    <!-- CAPABILITIES -->
-    <section class="slide" id="s-cap" data-label="Capabilities">
-        <div class="watermark">02</div>
-        <div class="slide-inner">
-            <p class="idx-tag"><span class="n">02</span> Capabilities</p>
-            <div class="cap-grid" id="cap-grid"></div>
-        </div>
-    </section>
+    <main class="main">
+        <div class="panels" id="panels">
  
-    <!-- CASEWORK -->
-    <section class="slide" id="s-casework" data-label="Casework">
-        <div class="watermark">03</div>
-        <div class="slide-inner">
-            <p class="idx-tag"><span class="n">03</span> Casework</p>
-            <div class="case-grid" id="case-grid"></div>
-        </div>
-    </section>
- 
-    <!-- CREDENTIALS -->
-    <section class="slide" id="s-cred" data-label="Credentials">
-        <div class="watermark">04</div>
-        <div class="slide-inner">
-            <p class="idx-tag"><span class="n">04</span> Credentials</p>
-            <div class="cred-grid" id="cred-grid"></div>
-        </div>
-    </section>
- 
-    <!-- CONTACT -->
-    <section class="slide" id="s-contact" data-label="Contact">
-        <div class="watermark">05</div>
-        <div class="slide-inner">
-            <p class="idx-tag"><span class="n">05</span> Contact</p>
-            <h2 class="contact-big">Let's Talk</h2>
-            <a href="mailto:you@example.com" class="contact-email">you@example.com</a>
-            <div class="contact-list">
-                <a href="#" target="_blank">GitHub ↗</a>
-                <a href="#" target="_blank">LinkedIn ↗</a>
-                <a href="#" target="_blank">Twitter ↗</a>
-                <span>Your City, Country</span>
+            <div class="panel active" data-panel="home">
+                <div class="panel-header"><div><div class="panel-title">Overview</div><div class="panel-sub">Cybersecurity Analyst — Blue Team</div></div></div>
+                <div class="home-hero">
+                    <h1>Your Name</h1>
+                    <p>Replace this with your own summary — how you got into security, what you focus on now
+                        (<strong>detection engineering, incident response, cloud security</strong>…), and what kind
+                        of role you're pursuing. Two honest sentences beat five generic ones.</p>
+                    <div class="home-cta-row">
+                        <a class="btn-primary" data-goto="case">View Casework</a>
+                        <a class="btn-secondary" href="resume.pdf">Download Résumé</a>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-card"><div class="stat-v">4</div><div class="stat-l">Projects</div></div>
+                        <div class="stat-card"><div class="stat-v">5</div><div class="stat-l">Certs</div></div>
+                        <div class="stat-card"><div class="stat-v">0</div><div class="stat-l">CTFs</div></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
  
+            <div class="panel" data-panel="cap">
+                <div class="panel-header"><div><div class="panel-title">Capabilities</div><div class="panel-sub">Where I focus</div></div></div>
+                <div class="cap-list" id="cap-list"></div>
+            </div>
+ 
+            <div class="panel" data-panel="case">
+                <div class="panel-header"><div><div class="panel-title">Casework</div><div class="panel-sub">Click a card for detail</div></div></div>
+                <div class="case-grid" id="case-grid"></div>
+            </div>
+ 
+            <div class="panel" data-panel="cred">
+                <div class="panel-header"><div><div class="panel-title">Credentials</div><div class="panel-sub">Certifications</div></div></div>
+                <div class="cred-list" id="cred-list"></div>
+            </div>
+ 
+            <div class="panel" data-panel="contact">
+                <div class="panel-header"><div><div class="panel-title">Contact</div></div></div>
+                <div class="contact-wrap">
+                    <h2>Let's talk</h2>
+                    <p>Reach out directly — I usually reply within a day or two.</p>
+                    <a href="mailto:you@example.com" class="contact-item">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+                        <div><div class="lbl">Email</div><div class="val">you@example.com</div></div>
+                    </a>
+                    <a href="#" target="_blank" class="contact-item">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 7 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.5 0 0 .8-.3 2.7 1a9.4 9.4 0 015 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5 4.1-1.3 7-5.1 7-9.5C22 6.5 17.5 2 12 2z"/></svg></div>
+                        <div><div class="lbl">GitHub</div><div class="val">github.com/yourhandle</div></div>
+                    </a>
+                    <a href="#" target="_blank" class="contact-item">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 21v-7a3 3 0 013-3v0a3 3 0 013 3v7M10 21V9m6 12v-7"/></svg></div>
+                        <div><div class="lbl">LinkedIn</div><div class="val">linkedin.com/in/yourhandle</div></div>
+                    </a>
+                </div>
+            </div>
+ 
+        </div>
+    </main>
 </div>
  
-<!-- CASE STUDY OVERLAY -->
-<div class="overlay" id="overlay">
-    <div class="overlay-head">
-        <span id="overlay-tag" style="font-family:var(--mono);font-size:0.75rem;color:var(--ink-dim);"></span>
-        <button class="overlay-close" id="overlay-close">Close ✕</button>
+<div class="modal-backdrop" id="modal">
+    <div class="modal-sheet">
+        <div class="modal-head">
+            <div><div class="modal-title" id="modal-title"></div><div class="modal-tags" id="modal-tags"></div></div>
+            <button class="modal-close" id="modal-close">✕</button>
+        </div>
+        <div id="modal-body"></div>
     </div>
-    <div class="overlay-body" id="overlay-body"></div>
 </div>
  
 <script>
-// ── DATA — replace with your real content ──
 const DATA = {
     capabilities: [
-        { num: "90%", name: "Penetration Testing", desc: "Replace with your own description — scope, engagements, methodology." },
-        { num: "88%", name: "Web App Security", desc: "OWASP Top 10, authentication bypass, business logic flaws." },
-        { num: "85%", name: "Network Security", desc: "Traffic analysis, protocol abuse, AD attack chains." },
-        { num: "75%", name: "Malware Analysis", desc: "Static/dynamic analysis, reverse engineering, YARA rules." },
-        { num: "80%", name: "Incident Response", desc: "Detection, triage, containment, and reporting." },
-        { num: "70%", name: "Cloud Security", desc: "IAM misconfiguration, container escape, serverless risk." },
+        { name: "Penetration Testing", pct: 90, desc: "Replace with your own description — scope, standout engagements." },
+        { name: "Web App Security", pct: 88, desc: "OWASP Top 10, authentication bypass, business logic flaws." },
+        { name: "Network Security", pct: 85, desc: "Traffic analysis, protocol abuse, AD attack chains." },
+        { name: "Malware Analysis", pct: 75, desc: "Static/dynamic analysis, reverse engineering, YARA rules." },
+        { name: "Cloud Security", pct: 70, desc: "IAM misconfiguration, container escape, serverless risk." },
     ],
     caseStudies: [
-        {
-            id: "cs1", title: "Your Flagship Project", tags: "Blue Team · Python",
-            challenge: "Replace with the real problem this project addressed.",
-            approach: "Replace with how you approached it.",
-            outcome: "Replace with the measurable result.",
-            link: "#",
-            chain: [
-                { stage: "Recon", detail: "Replace: what was discovered during reconnaissance." },
-                { stage: "Foothold", detail: "Replace: how initial access was established." },
-                { stage: "Escalation", detail: "Replace: what was escalated from that foothold." },
-                { stage: "Detection", detail: "Replace: how the activity was surfaced." },
-                { stage: "Remediation", detail: "Replace: what fix or control resulted." },
-            ],
-        },
+        { id: "cs1", title: "Your Flagship Project", tags: "Blue Team · Python",
+          challenge: "Replace with the real problem this project addressed.",
+          approach: "Replace with how you approached it.",
+          outcome: "Replace with the measurable result.", link: "#",
+          chain: [
+            { stage: "Recon", detail: "Replace: what was discovered during reconnaissance." },
+            { stage: "Foothold", detail: "Replace: how initial access was established." },
+            { stage: "Escalation", detail: "Replace: what was escalated from that foothold." },
+            { stage: "Detection", detail: "Replace: how the activity was surfaced." },
+            { stage: "Remediation", detail: "Replace: what fix or control resulted." },
+          ] },
         { id: "cs2", title: "Project Two", tags: "Bash · Threat Hunting", challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
         { id: "cs3", title: "Project Three", tags: "Python · Endpoint Security", challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
         { id: "cs4", title: "Project Four", tags: "Node.js · API Security", challenge: "Replace with the real problem.", approach: "Replace with your approach.", outcome: "Replace with the outcome.", link: "#" },
@@ -344,119 +323,98 @@ const DATA = {
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
  
 // ── RENDER CAPABILITIES ──
-const capGrid = document.getElementById('cap-grid');
+const capList = document.getElementById('cap-list');
 DATA.capabilities.forEach(c => {
-    const cell = document.createElement('div');
-    cell.className = 'cap-cell';
-    cell.innerHTML = `<div class="cap-num">${esc(c.num)}</div><div class="cap-name">${esc(c.name)}</div><div class="cap-desc">${esc(c.desc)}</div>`;
-    capGrid.appendChild(cell);
+    const row = document.createElement('div');
+    row.className = 'cap-row';
+    row.innerHTML = `<div class="cap-top"><span class="cap-name">${esc(c.name)}</span><span class="cap-pct">${c.pct}%</span></div>
+        <div class="cap-track"><div class="cap-fill" data-w="${c.pct}"></div></div>
+        <div class="cap-desc">${esc(c.desc)}</div>`;
+    capList.appendChild(row);
 });
  
 // ── RENDER CASEWORK ──
 const caseGrid = document.getElementById('case-grid');
-DATA.caseStudies.forEach((cs, i) => {
-    const row = document.createElement('div');
-    row.className = 'case-row';
-    row.innerHTML = `
-        <div class="cn">${String(i + 1).padStart(2, '0')}</div>
-        <div><div class="ct">${esc(cs.title)}</div><div class="ctags">${esc(cs.tags)}</div></div>
-        <div class="cgo">View →</div>`;
-    row.addEventListener('click', () => openOverlay(cs));
-    caseGrid.appendChild(row);
+DATA.caseStudies.forEach(cs => {
+    const card = document.createElement('div');
+    card.className = 'case-card';
+    card.innerHTML = `<div class="ct">${esc(cs.title)}</div><div class="ctags">${esc(cs.tags)}</div><div class="cd">${esc(cs.challenge)}</div>`;
+    card.addEventListener('click', () => openModal(cs));
+    caseGrid.appendChild(card);
 });
  
 // ── RENDER CREDENTIALS ──
-const credGrid = document.getElementById('cred-grid');
+const credList = document.getElementById('cred-list');
 DATA.certs.forEach(c => {
     const row = document.createElement('div');
     row.className = 'cred-row';
-    row.innerHTML = `<div class="cy">${esc(c.year)}</div><div class="cnm">${esc(c.name)}</div><div class="cis">${esc(c.issuer)}</div>`;
-    credGrid.appendChild(row);
+    row.innerHTML = `<div class="cred-year">${esc(c.year)}</div><div class="cred-name">${esc(c.name)}</div><div class="cred-iss">${esc(c.issuer)}</div>`;
+    credList.appendChild(row);
 });
  
-// ── OVERLAY ──
-const overlay = document.getElementById('overlay');
-const overlayBody = document.getElementById('overlay-body');
-const overlayTag = document.getElementById('overlay-tag');
+document.getElementById('yr').textContent = new Date().getFullYear();
  
-function openOverlay(cs) {
-    overlayTag.textContent = cs.tags;
+// ── MODAL ──
+const modal = document.getElementById('modal');
+function openModal(cs) {
+    document.getElementById('modal-title').textContent = cs.title;
+    document.getElementById('modal-tags').textContent = cs.tags;
     let chainHtml = '';
     if (cs.chain) {
         chainHtml = `
-        <p style="font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--red);margin-bottom:0.8rem;">Attack Chain Walkthrough</p>
         <div class="chain-row">${cs.chain.map((s, i) => `<button class="chain-btn${i===0?' active':''}" data-i="${i}">${esc(s.stage)}</button>`).join('')}</div>
         <div class="chain-panel" data-panel>${esc(cs.chain[0].detail)}</div>`;
     }
-    overlayBody.innerHTML = `
-        <h2 class="overlay-title">${esc(cs.title)}</h2>
-        <div class="overlay-cols">
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-cols">
             <div><h5>Challenge</h5><p>${esc(cs.challenge)}</p></div>
             <div><h5>Approach</h5><p>${esc(cs.approach)}</p></div>
             <div><h5>Outcome</h5><p>${esc(cs.outcome)}</p></div>
         </div>
         ${chainHtml}
-        <a href="${cs.link}" class="overlay-link" target="_blank">View repository →</a>`;
+        <a href="${cs.link}" class="modal-link" target="_blank">View repository →</a>`;
     if (cs.chain) {
-        const btns = overlayBody.querySelectorAll('.chain-btn');
-        const panel = overlayBody.querySelector('[data-panel]');
+        const btns = document.querySelectorAll('.chain-btn');
+        const panel = document.querySelector('[data-panel]');
         btns.forEach(b => b.addEventListener('click', () => {
             btns.forEach(x => x.classList.remove('active'));
             b.classList.add('active');
             panel.textContent = cs.chain[+b.dataset.i].detail;
         }));
     }
-    overlay.classList.add('open');
+    modal.classList.add('open');
 }
-document.getElementById('overlay-close').addEventListener('click', () => overlay.classList.remove('open'));
-window.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('open'); });
+document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('open'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+window.addEventListener('keydown', e => { if (e.key === 'Escape') modal.classList.remove('open'); });
  
-// ── DECK NAV DOTS + PROGRESS + KEYBOARD ──
-const deck = document.getElementById('deck');
-const slides = Array.from(document.querySelectorAll('.slide'));
-const navWrap = document.getElementById('deck-nav');
-const progressFill = document.getElementById('deck-progress-fill');
+// ── PANEL SWITCHING ──
+const navItems = document.querySelectorAll('.nav-item');
+const panels = document.querySelectorAll('.panel');
  
-slides.forEach((s, i) => {
-    const dot = document.createElement('button');
-    dot.title = s.dataset.label;
-    dot.addEventListener('click', () => s.scrollIntoView({ behavior: 'smooth' }));
-    navWrap.appendChild(dot);
-});
-const dots = Array.from(navWrap.children);
- 
-let currentIdx = 0;
-const spy = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            const idx = slides.indexOf(e.target);
-            currentIdx = idx;
-            dots.forEach((d, i) => d.classList.toggle('on', i === idx));
-            progressFill.style.height = ((idx + 1) / slides.length) * 100 + '%';
+function showPanel(name) {
+    navItems.forEach(n => n.classList.toggle('on', n.dataset.panel === name));
+    panels.forEach(p => {
+        const active = p.dataset.panel === name;
+        p.classList.toggle('active', active);
+        if (active) {
+            p.querySelectorAll('.cap-fill').forEach(f => { f.style.width = f.dataset.w + '%'; });
         }
     });
-}, { root: deck, threshold: 0.6 });
-slides.forEach(s => spy.observe(s));
+}
  
-document.querySelectorAll('[data-goto]').forEach(el => {
-    el.addEventListener('click', e => {
-        e.preventDefault();
-        slides[+el.dataset.goto].scrollIntoView({ behavior: 'smooth' });
-    });
+navItems.forEach(item => item.addEventListener('click', () => showPanel(item.dataset.panel)));
+document.querySelectorAll('[data-goto]').forEach(el => el.addEventListener('click', () => showPanel(el.dataset.goto)));
+ 
+const panelOrder = ['home', 'cap', 'case', 'cred', 'contact'];
+document.addEventListener('keydown', e => {
+    if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    if (e.key >= '1' && e.key <= '5') showPanel(panelOrder[+e.key - 1]);
 });
  
-deck.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-        e.preventDefault();
-        if (currentIdx < slides.length - 1) slides[currentIdx + 1].scrollIntoView({ behavior: 'smooth' });
-    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        e.preventDefault();
-        if (currentIdx > 0) slides[currentIdx - 1].scrollIntoView({ behavior: 'smooth' });
-    }
-});
-deck.tabIndex = 0;
-deck.focus();
+// init default panel bars
+showPanel('home');
+document.querySelector('.panel[data-panel="cap"]').querySelectorAll('.cap-fill').forEach(f => { f.style.width = f.dataset.w + '%'; });
 </script>
 </body>
 </html>
- 
